@@ -96,15 +96,33 @@ public class Driver{
             Entity currentObj = entityList.get(i);
             map[currentObj.getY()][currentObj.getX()] = currentObj;
         }
-
-        System.out.println("\f");
-        System.out.println(printMap(map));
+        
         runGame(map, entityList);
     }
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList){
-        
-        
+        Scanner s = new Scanner(System.in);
+        while(true){            
+            System.out.println("\f");
+            System.out.println(map);
+            
+            String action = s.next();
+            
+            switch(action){
+                case "w":
+                    break;
+                case "a":
+                    break;
+                case "s":
+                    break;
+                case "d":
+                    break;
+                case "kill":
+                    return;
+                default:
+                    break;
+            }
+        }
     }
 
     public static String printMap(Entity[][] map){
