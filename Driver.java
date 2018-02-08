@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Driver{
-    public static void main (String args[]){
+    public static void main(String args[]){
         Entity[][] map = new Entity[15][15];
         ArrayList<Entity> entityList = new ArrayList<Entity>();
         int[][] takenCoord = new int[7][2];
@@ -16,7 +16,7 @@ public class Driver{
                 map[i][j] = new Air();
             }
         }
-        
+
         //create obj
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
         Armor leatherArmor = new Armor(0, 0, 0, "Leather");
@@ -36,7 +36,7 @@ public class Driver{
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
-        
+
         while(checkCoord(takenCoord, newCoordX, newCoordY) == false){       //farmer 2
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
@@ -45,7 +45,7 @@ public class Driver{
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
-        
+
         while(checkCoord(takenCoord, newCoordX, newCoordY) == false){       //weapon
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
@@ -54,7 +54,7 @@ public class Driver{
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
-        
+
         while(checkCoord(takenCoord, newCoordX, newCoordY) == false){       //potion
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
@@ -63,7 +63,7 @@ public class Driver{
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
-        
+
         while(checkCoord(takenCoord, newCoordX, newCoordY) == false){       //armor
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
@@ -72,7 +72,7 @@ public class Driver{
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
-        
+
         while(checkCoord(takenCoord, newCoordX, newCoordY) == false){       //armor
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
@@ -81,9 +81,8 @@ public class Driver{
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
-        
 
-        //number of random weap/armor in map?
+        //number of random weapon/armor in map?
 
         entityList.add(hero); //add all obj to list
         entityList.add(farmer1);
@@ -100,6 +99,12 @@ public class Driver{
 
         System.out.println("\f");
         System.out.println(printMap(map));
+        runGame(map, entityList);
+    }
+
+    public static void runGame(Entity[][] map, ArrayList<Entity> entityList){
+        
+        
     }
 
     public static String printMap(Entity[][] map){
