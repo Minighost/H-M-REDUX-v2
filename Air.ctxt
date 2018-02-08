@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Air()
+comment1.params=
+comment1.target=int\ getX()
+comment2.params=
+comment2.target=int\ getY()
+comment3.params=
+comment3.target=void\ setX()
+comment4.params=
+comment4.target=void\ setY()
+numComments=5
