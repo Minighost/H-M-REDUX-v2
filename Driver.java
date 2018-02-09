@@ -117,9 +117,19 @@ public class Driver{
             System.out.println("\f");
             System.out.println(printMap(map));
             
-            System.out.println("-- Info --");
+            System.out.println("\n-- Info --");
             System.out.println(hero);
-            System.out.println("Inventory: " + hero.getHardStorage().length + " items\n");
+            int item_counter = 0;
+            for(int i = 0; i < hero.getHardStorage().length; i++){
+                if(!(hero.getHardStorage()[i] == null)){
+                    item_counter++;
+                }
+            }
+            if(item_counter == 1){
+                System.out.println("Inventory: " + item_counter + " item\n");
+            } else {
+                System.out.println("Inventory: " + item_counter + " items\n");
+            }
             
             String surroundings = updateSurroundings(hero, map);
             String[] surrounding_parts = surroundings.split("_");
@@ -129,13 +139,13 @@ public class Driver{
             toSouth = surrounding_parts[2];
             toEast = surrounding_parts[3];
             
-            System.out.println("\n\nFeed: " + lastAction);
+            System.out.println("Feed: " + lastAction);
             System.out.println("\nNorth: " + toNorth);
-            System.out.println("\nWest: " + toWest);
-            System.out.println("\nSouth: "  + toSouth);
-            System.out.println("\nEast: " + toEast);
+            System.out.println("West: " + toWest);
+            System.out.println("South: "  + toSouth);
+            System.out.println("East: " + toEast);
             
-            System.out.println("\n\t\tW - North\tE - Inventory");
+            System.out.println("\n\n\t\tW - North\tE - Inventory");
             System.out.println("A - West\tS - South\tD - East");
             
             System.out.print("\nNext action: ");
@@ -261,6 +271,9 @@ public class Driver{
                         AttackSequence(map, hero);
                         lastAction = "Fought monster";
                     }
+                    break;
+                case "e":
+                    inventoryMenu(hero);
                     break;
                 case "kill":
                     return;
@@ -421,6 +434,44 @@ public class Driver{
                 default:
                     System.out.println("Uh oh, you broke");
                     break;
+            }
+        }
+    }
+    
+    public static void inventoryMenu(Hero hero){
+        Scanner s = new Scanner(System.in);
+        
+        Entity[] list = hero.getHardStorage();
+        
+        while(true){
+            System.out.println("\f");
+            for(int i = 0; i < list.length; i++){
+                if(list[i] != null){
+                    System.out.println(list[i]);
+                }
+            }
+            System.out.println("What would you like to do?");
+            System.out.println("1. Equip item");
+            System.out.println("2. Quit");
+            System.out.print("Choice: ");
+            
+            int choice = s.nextInt();
+            
+            if(choice == 2){
+                break;
+            }
+            if(choice == 1){
+                System.out.println("\f");
+                System.out.println("Which item would you like to equip?");
+                for(int i = 0; i < list.length; i++){
+                    if(list[i] != null){
+                        System.out.println((i + 1) + ". " + list[i]);
+                    }
+                }
+                System.out.println("\nChoice: ");
+                choice = s.nextInt();
+                choice--;
+                break;
             }
         }
     }
