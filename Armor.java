@@ -1,10 +1,17 @@
-public class Armor extends Entity{
+public class Armor extends Entity implements ShopItem{
     private int hp;
     private int x, y;
     private double dmgReduction = 0;
     private String name;
+    private int price;
     
     public Armor(){
+    }
+    
+    public Armor(double dmgReduction, String name, int price){
+        this.dmgReduction = dmgReduction;
+        this.name = name;
+        this.price = price;
     }
     
     public Armor(int x, int y, double dmReduction, String name){
@@ -32,6 +39,10 @@ public class Armor extends Entity{
     
     public String getName(){
         return this.name;
+    }
+    
+    public int getPrice(){
+        return price;
     }
     
     public int reduceDmg(int dmg){

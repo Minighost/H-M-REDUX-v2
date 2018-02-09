@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Footwear()
+comment1.params=chanceInc\ name\ price
+comment1.target=Footwear(double,\ java.lang.String,\ int)
+comment2.params=
+comment2.target=int\ getX()
+comment3.params=
+comment3.target=int\ getY()
+comment4.params=
+comment4.target=int\ getPrice()
+comment5.params=
+comment5.target=java.lang.String\ getName()
+numComments=6

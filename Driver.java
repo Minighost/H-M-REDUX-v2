@@ -153,13 +153,13 @@ public class Driver{
                         case "class Farmer":
                             break;
                         case "class Potion":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() - 1);
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                         case "class Weapon":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() - 1);
                             map[hero.getY()][hero.getX()] = hero;
@@ -168,7 +168,6 @@ public class Driver{
                     if(Math.random() < 0.25){
                         AttackSequence(map, hero);
                     }
-                    
                     break;
                 case "a":
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
@@ -180,13 +179,13 @@ public class Driver{
                         case "class Farmer":
                             break;
                         case "class Potion":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                         case "class Weapon":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
@@ -206,13 +205,13 @@ public class Driver{
                         case "class Farmer":
                             break;
                         case "class Potion":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() + 1);
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                         case "class Weapon":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() + 1);
                             map[hero.getY()][hero.getX()] = hero;
@@ -232,13 +231,13 @@ public class Driver{
                         case "class Farmer":
                             break;
                         case "class Potion":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                         case "class Weapon":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
