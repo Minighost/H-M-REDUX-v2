@@ -20,7 +20,7 @@ public class Driver2{
         // Create obj
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
         Armor leatherArmor = new Armor(0, 0, 0, "Leather");
-        Hero hero = new Hero(0, 14, dagger, leatherArmor);
+        Hero hero = new Hero(0, 14, dagger, leatherArmor, "Hero");
         takenCoord[index][0] = hero.getX();
         takenCoord[index][1] = hero.getY();
         index++;
@@ -59,7 +59,7 @@ public class Driver2{
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
         }
-        Potion potion1 = new Potion(newCoordX, newCoordY, 50);
+        Potion potion1 = new Potion(newCoordX, newCoordY, "Potion", 50);
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
@@ -102,39 +102,10 @@ public class Driver2{
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList, Hero hero){
         Scanner s = new Scanner(System.in);
-<<<<<<< HEAD:Driver2.java
-<<<<<<< HEAD:Driver2.java
-<<<<<<< HEAD:Driver2.java
-<<<<<<< HEAD:DriverTest.java
-<<<<<<< HEAD:Driver2.java
-        printMap(map);
-        while(true){            
-=======
-        while(true){
->>>>>>> e7b11352dba7e0994d3c97422b8803153a716904:DriverTest.java
-            System.out.println("\f");
-=======
         printMap(map);
         while(true){            
             //System.out.println("\f");
->>>>>>> parent of e7b1135... merging and changing:Driver2.java
-=======
-        printMap(map);
-        while(true){            
-            //System.out.println("\f");
->>>>>>> parent of e7b1135... merging and changing:Driver2.java
-=======
-        printMap(map);
-        while(true){            
-            //System.out.println("\f");
->>>>>>> parent of e7b1135... merging and changing:Driver2.java
-=======
-        printMap(map);
-        while(true){            
-            //System.out.println("\f");
->>>>>>> parent of e7b1135... merging and changing:Driver2.java
             System.out.println(printMap(map));
-
             String action = s.next();
             switch(action){
                 case "w":
