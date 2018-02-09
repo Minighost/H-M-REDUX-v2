@@ -22,6 +22,8 @@ public class Hero extends Entity{
         this.armor = a;
         this.hides = 0;
         this.gold = 0;
+        this.pockets = new ArrayList<Entity>();
+        this.name = n;
     }
     
     public int getGold(){
@@ -30,8 +32,6 @@ public class Hero extends Entity{
     
     public void setGold(int newGold){
         this.gold = newGold;
-        this.pockets = new ArrayList<Entity>();
-        this.name = n;
     }
     
     public int getX(){

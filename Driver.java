@@ -9,7 +9,7 @@ public class Driver{
         int index = 0;
         int newCoordX = 0;
         int newCoordY = 0;
-        
+
         Scanner theName = new Scanner(System.in);
         System.out.println("What is your name?");
         System.out.print("Name: ");
@@ -101,7 +101,7 @@ public class Driver{
             Entity currentObj = entityList.get(i);
             map[currentObj.getY()][currentObj.getX()] = currentObj;
         }
-        
+
         runGame(map, entityList, hero);
     }
 
@@ -110,31 +110,31 @@ public class Driver{
         while(true){
             System.out.println("\f");
             System.out.println(printMap(map));
-            
+
             String action = s.next();
-            
+
             switch(action){
                 case "w":
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
                         case "class Air":
-                            map[hero.getY()][hero.getX()] = new Air();
-                            hero.setY(hero.getY() - 1);
-                            map[hero.getY()][hero.getX()] = hero;
-                            break;
+                        map[hero.getY()][hero.getX()] = new Air();
+                        hero.setY(hero.getY() - 1);
+                        map[hero.getY()][hero.getX()] = hero;
+                        break;
                         case "class Farmer":
-                            break;
+                        break;
                         case "class Potion":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
-                            map[hero.getY()][hero.getX()] = new Air();
-                            hero.setY(hero.getY() - 1);
-                            map[hero.getY()][hero.getX()] = hero;
-                            break;
+                        hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                        map[hero.getY()][hero.getX()] = new Air();
+                        hero.setY(hero.getY() - 1);
+                        map[hero.getY()][hero.getX()] = hero;
+                        break;
                         case "class Weapon":
-                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
-                            map[hero.getY()][hero.getX()] = new Air();
-                            hero.setY(hero.getY() - 1);
-                            map[hero.getY()][hero.getX()] = hero;
-                            break;
+                        hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                        map[hero.getY()][hero.getX()] = new Air();
+                        hero.setY(hero.getY() - 1);
+                        map[hero.getY()][hero.getX()] = hero;
+                        break;
                     }
                     break;
                 case "a":
@@ -150,23 +150,23 @@ public class Driver{
             }
         }
     }
-    
+
     public static Entity staticCheck(Hero hero, Entity[][] map, ArrayList<Entity> EntityList, String action){
         int x = hero.getX();
         int y = hero.getY();
         switch(action){
             case "w":
-                y -= 1;
-                break;
+            y -= 1;
+            break;
             case "a":
-                x -= 1;
-                break;
+            x -= 1;
+            break;
             case "s":
-                y += 1;
-                break;
+            y += 1;
+            break;
             case "d":
-                x += 1;
-                break;
+            x += 1;
+            break;
         }
         return map[y][x];
     }
@@ -209,28 +209,54 @@ public class Driver{
         Monster monster = new Monster(hero.getX(), hero.getY(), tempHP, level, tempName);
         System.out.println("A wild " + monster.getName() + " appeared!");
         pressEnter();
-        while(true){
+        System.out.println("\f");
+        while(monster.getHP() > 0){
             int choice = 0;
-            System.out.println("\f");
+
             System.out.println("Your turn!\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
             choice = s.nextInt();
             switch(choice){
                 case 1:
-                System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the monster!");
-                int heroDMGdealt = (int)(Math.random()*hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
-                System.out.println("\n---You dealt " + heroDMGdealt + " to the " + monster.getName() + "!---");
-                monster.setHP(monster.getHP() - heroDMGdealt);
-                break;
+                    System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the monster!");
+                    int heroDMGdealt = (int)(Math.random()*hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                    monster.setHP(monster.getHP() - heroDMGdealt);
+                    if(monster.getHP() < 0){
+                        monster.setHP(0);
+                    }
+                    System.out.println("\n---You dealt " + heroDMGdealt + " damage to the " + monster.getName() + "!---" +
+                        "\nThe " + monster.getName() + " has " + monster.getHP() + " health left.");
+                    if(monster.getHP() == 0){
+                        if(monster.getLevel() == 1){
+                            hero.setGold(hero.getGold() + 25);
+                        }else if(monster.getLevel() == 2){
+                            hero.setGold(hero.getGold() + 50);
+                        }else if(monster.getLevel() == 3){
+                            hero.setGold(hero.getGold() + 75);
+                        }
+                        return;
+                    }
+                    break;
                 case 2:
-                System.out.println("You run far away...");
-                break;
+                    boolean hasRun = false;
+                    double chance = Math.random();
+                    if(monster.getLevel() == 1 && chance < 0.75){
+                        hasRun = true;
+                    }else if(monster.getLevel() == 2 && chance < 0.5){
+                        hasRun = true;
+                    }else if(monster.getLevel() == 3 && chance < 0.25){
+                        hasRun = true;
+                    }
+                    if(hasRun == true){
+                        System.out.println("You run far away...");
+                        return;
+                    }
+                    break;
                 default:
-                System.out.println("something fcked up");
-                break;
+                    System.out.println("Uh oh, you broke");
+                    break;
             }
-            break;
         }
     }
 
