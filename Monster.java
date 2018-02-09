@@ -54,4 +54,8 @@ public class Monster extends Entity{
     public void setName(String newName){
         this.name = newName;
     }
+    
+    public String toString(){
+        return this.name;
+    }
 }

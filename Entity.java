@@ -6,4 +6,5 @@ public abstract class Entity{
 	public abstract int getY();
 	public abstract int getX();
 	public abstract String getName();
+	public abstract String toString();
 }

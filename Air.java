@@ -22,4 +22,8 @@ public class Air extends Entity{
     
     public void setY(){
     }
+    
+    public String toString(){
+        return "Air";
+    }
 }

@@ -33,4 +33,7 @@ public class Satchel extends Entity implements ShopItem{
     public String getName(){
         return this.name;
     }
+    public String toString(){
+        return this.name;
+    }
 }

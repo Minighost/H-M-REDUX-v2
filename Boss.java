@@ -60,4 +60,8 @@ public class Boss extends Entity{
     public int getLevel(){
         return this.level;
     }
+    
+    public String toString(){
+        return this.name;
+    }
 }

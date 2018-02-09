@@ -37,22 +37,22 @@ public class Hero extends Entity{
         }else{
             farmer.shopItems[objectNumber-1] = null;
             hides -= item.getPrice();
-            if((item.getClass()).isInstance(new Potion())){
+            if((item.getClass()).isInstance(new Potion(null, 0, 0))){
                 storage[index] = (Potion)item;
                 index++;
             }
-            if((item.getClass()).isInstance(new Bomb())){
+            if((item.getClass()).isInstance(new Bomb(null, 0))){
                 storage[index] = (Bomb)item;
                 index++;
             }
-            if((item.getClass()).isInstance(new Armor())){
+            if((item.getClass()).isInstance(new Armor(0, null, 0))){
                 storage[index] = (Armor)item;
                 index++;
             }
-            if((item.getClass()).isInstance(new Satchel())){
+            if((item.getClass()).isInstance(new Satchel(0, null, 0))){
                 Entity[] newStorage = new Entity[((Satchel)item).getSize()];
             }
-            if((item.getClass()).isInstance(new Footwear())){
+            if((item.getClass()).isInstance(new Footwear(0, null, 0))){
                 footwear = (Footwear)item;
             }
         }
