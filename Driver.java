@@ -112,6 +112,7 @@ public class Driver{
         String toWest = "";
         String toSouth = "";
         String toEast = "";
+        double monsterChance = 0; //Hardcoded Monster Creation chance
         
         while(true){
             System.out.println("\f");
@@ -166,6 +167,7 @@ public class Driver{
                             lastAction = "Moved North";
                             break;
                         case "class Farmer":
+                            FarmerSeq(hero, map, (Farmer)map[hero.getY()-1][hero.getX()]);    
                             break;
                         case "class Potion":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
@@ -182,7 +184,7 @@ public class Driver{
                             lastAction = "Picked up weapon";
                             break;
                     }
-                    if(Math.random() < 0.15){
+                    if(Math.random() < monsterChance){
                         AttackSequence(map, hero);
                         lastAction = "Fought monster";
                     }
@@ -201,6 +203,7 @@ public class Driver{
                             lastAction = "Moved West";
                             break;
                         case "class Farmer":
+                            FarmerSeq(hero, map, (Farmer)map[hero.getY()][hero.getX()-1]);
                             break;
                         case "class Potion":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
@@ -217,7 +220,7 @@ public class Driver{
                             lastAction = "Picked up weapon";
                             break;
                     }
-                    if(Math.random() < 0.15){
+                    if(Math.random() < monsterChance){
                         AttackSequence(map, hero);
                         lastAction = "Fought monster";
                     }
@@ -236,6 +239,7 @@ public class Driver{
                             lastAction = "Moved South";
                             break;
                         case "class Farmer":
+                            FarmerSeq(hero, map, (Farmer)map[hero.getY()+1][hero.getX()]);
                             break;
                         case "class Potion":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
@@ -254,7 +258,7 @@ public class Driver{
                         default:
                             break;
                     }
-                    if(Math.random() < 0.15){
+                    if(Math.random() < monsterChance){
                         AttackSequence(map, hero);
                         lastAction = "Fought monster";
                     }
@@ -273,6 +277,7 @@ public class Driver{
                             lastAction = "Moved East";
                             break;
                         case "class Farmer":
+                            FarmerSeq(hero, map, (Farmer)map[hero.getY()][hero.getX()+1]);
                             break;
                         case "class Potion":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
@@ -289,7 +294,7 @@ public class Driver{
                             lastAction = "Picked up weapon";
                             break;
                     }
-                    if(Math.random() < 0.15){
+                    if(Math.random() < monsterChance){
                         AttackSequence(map, hero);
                         lastAction = "Fought monster";
                     }
@@ -471,9 +476,8 @@ public class Driver{
         System.out.println("You meet a farmer.");
         pressEnter();
         while(true){
-            System.out.println("Welcome to the farmer's shop! What can we do for you today?");
-            System.out.println("1. Buy items");
-            System.out.println("2. Buy information");
+            System.out.println("\fWelcome to the Farmer's Shoppe! What can we do for you today?");
+            System.out.println("1. Buy items\n2. Buy information\n3. Exit Shop\n");
             System.out.print("Choice: ");
             choice = s.nextInt();
             switch(choice){
@@ -487,10 +491,12 @@ public class Driver{
                         pressEnter();
                         continue;
                     }
-                    hero.buyObject(choice + 1, farmer);
+                    hero.buyObject(choice, farmer);
                     break;
                 case 2:
-                    System.out.println("I don't have anything for you right now, please cmon back later.");
+                    System.out.println("I don't have anything for you right now. Please c'mon back later!");
+                case 3:
+                    return;
             }
         }
     }

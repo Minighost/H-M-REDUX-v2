@@ -53,7 +53,10 @@ public class Farmer extends Entity{
     
     public void getShopItems(){
         for(int i = 0; i < shopItems.length; i++){
-            System.out.println((i + 1) + ". " + shopItems[i]);
+            if(shopItems[i] == null){
+                System.out.println((i + 1) + ". SOLD OUT");
+            }
+            System.out.println((i + 1) + ". " + shopItems[i] + "\n");
         }
     }
 
