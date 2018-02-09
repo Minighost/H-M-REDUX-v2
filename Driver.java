@@ -136,6 +136,9 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                     }
+                    if(Math.random() < 0.25){
+                        AttackSequence(map, hero);
+                    }
                     break;
                 case "a":
                     break;
@@ -209,28 +212,47 @@ public class Driver{
         Monster monster = new Monster(hero.getX(), hero.getY(), tempHP, level, tempName);
         System.out.println("A wild " + monster.getName() + " appeared!");
         pressEnter();
-        while(true){
+        System.out.println("\f");
+        while(monster.getHP() > 0){
             int choice = 0;
-            System.out.println("\f");
+            
             System.out.println("Your turn!\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
             choice = s.nextInt();
             switch(choice){
                 case 1:
-                System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the monster!");
-                int heroDMGdealt = (int)(Math.random()*hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
-                System.out.println("\n---You dealt " + heroDMGdealt + " to the " + monster.getName() + "!---");
-                monster.setHP(monster.getHP() - heroDMGdealt);
-                break;
+                    System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the monster!");
+                    int heroDMGdealt = (int)(Math.random()*hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                    monster.setHP(monster.getHP() - heroDMGdealt);
+                    if(monster.getHP() < 0){
+                        monster.setHP(0);
+                    }
+                    System.out.println("\n---You dealt " + heroDMGdealt + " damage to the " + monster.getName() + "!---" +
+                    "\nThe " + monster.getName() + " has " + monster.getHP() + " health left.");
+                    if(monster.getHP() == 0){
+                        return;
+                    }
+                    break;
                 case 2:
-                System.out.println("You run far away...");
-                break;
+                    boolean hasRun = false;
+                    double chance = Math.random();
+                    if(monster.getLevel() == 1 && chance < 0.75){
+                        hasRun = true;
+                    }else if(monster.getLevel() == 2 && chance < 0.5){
+                        hasRun = true;
+                    }else if(monster.getLevel() == 3 && chance < 0.25){
+                        hasRun = true;
+                    }
+                    if(hasRun == true){
+                        System.out.println("You run far away...");
+                        return;
+                    }
+                    break;
                 default:
-                System.out.println("something fcked up");
-                break;
+                    System.out.println("Uh oh, you broke");
+                    break;
             }
-            break;
         }
     }
 

@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Driver2{
+public class DriverTest{
     public static void main(String args[]){
         Entity[][] map = new Entity[15][15];
         ArrayList<Entity> entityList = new ArrayList<Entity>();
@@ -9,6 +9,11 @@ public class Driver2{
         int index = 0;
         int newCoordX = 0;
         int newCoordY = 0;
+        
+        Scanner theName = new Scanner(System.in);
+        System.out.println("What is your name?");
+        System.out.print("Name: ");
+        String heroName = theName.next();
 
         // Testing map printout
         for(int i = 0; i < 15; i++){
@@ -17,10 +22,10 @@ public class Driver2{
             }
         }
 
-        // Create obj
+        //create obj
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
         Armor leatherArmor = new Armor(0, 0, 0, "Leather");
-        Hero hero = new Hero(0, 14, dagger, leatherArmor);
+        Hero hero = new Hero(0, 14, dagger, leatherArmor, heroName);
         takenCoord[index][0] = hero.getX();
         takenCoord[index][1] = hero.getY();
         index++;
@@ -59,7 +64,7 @@ public class Driver2{
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
         }
-        Potion potion1 = new Potion(newCoordX, newCoordY, 50);
+        Potion potion1 = new Potion(newCoordX, newCoordY, "Medium Potion", 50);
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
@@ -82,7 +87,7 @@ public class Driver2{
         takenCoord[index][1] = newCoordY;
         index++;
 
-        // Number of random weapon/armor in map?
+        //number of random weapon/armor in map?
 
         entityList.add(hero); //add all obj to list
         entityList.add(farmer1);
@@ -96,38 +101,50 @@ public class Driver2{
             Entity currentObj = entityList.get(i);
             map[currentObj.getY()][currentObj.getX()] = currentObj;
         }
-
+        
         runGame(map, entityList, hero);
     }
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList, Hero hero){
         Scanner s = new Scanner(System.in);
-        printMap(map);
-        while(true){            
-            //System.out.println("\f");
+        while(true){
+            System.out.println("\f");
             System.out.println(printMap(map));
-
+            
             String action = s.next();
+            
             switch(action){
                 case "w":
+                    switch(staticCheck(hero, map, entityList, action).getClass().toString()){
+                        case "class Air":
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Farmer":
+                            break;
+                        case "class Potion":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Weapon":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                    }
                     if(Math.random() < 0.25){
                         AttackSequence(map, hero);
                     }
                     break;
                 case "a":
-                    if(Math.random() < 0.25){
-                        AttackSequence(map, hero);
-                    }
                     break;
                 case "s":
-                    if(Math.random() < 0.25){
-                        AttackSequence(map, hero);
-                    }
                     break;
                 case "d":
-                    if(Math.random() < 0.25){
-                        AttackSequence(map, hero);
-                    }
                     break;
                 case "kill":
                     return;
@@ -135,6 +152,26 @@ public class Driver2{
                     break;
             }
         }
+    }
+    
+    public static Entity staticCheck(Hero hero, Entity[][] map, ArrayList<Entity> EntityList, String action){
+        int x = hero.getX();
+        int y = hero.getY();
+        switch(action){
+            case "w":
+                y -= 1;
+                break;
+            case "a":
+                x -= 1;
+                break;
+            case "s":
+                y += 1;
+                break;
+            case "d":
+                x += 1;
+                break;
+        }
+        return map[y][x];
     }
 
     public static String printMap(Entity[][] map){
