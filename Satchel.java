@@ -31,6 +31,6 @@ public class Satchel extends Entity implements ShopItem{
     }
 
     public String getName(){
-        return "Satchel";
+        return this.name;
     }
 }

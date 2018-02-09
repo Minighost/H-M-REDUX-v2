@@ -23,6 +23,6 @@ public class Bomb extends Entity implements ShopItem{
     }
 
     public String getName(){
-        return "Bomb";
+        return this.name;
     }
 }

@@ -54,6 +54,6 @@ public class Potion extends Entity implements ShopItem{
     }
 
     public String toString(){
-        return "Potion";
+        return this.name;
     }
 }

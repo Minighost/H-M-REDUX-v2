@@ -1,5 +1,4 @@
 public class Armor extends Entity implements ShopItem{
-    private int hp;
     private int x, y;
     private double dmgReduction = 0;
     private String name;
@@ -51,6 +50,6 @@ public class Armor extends Entity implements ShopItem{
     }
     
     public String toString(){
-        return "Name: " + this.name + "; Integrity: " + this.hp;
+        return this.name;
     }
 }
