@@ -165,7 +165,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                     }
-                    if(Math.random() < 0.25){
+                    if(Math.random() < 0.15){
                         AttackSequence(map, hero);
                     }
                     break;
@@ -191,7 +191,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                     }
-                    if(Math.random() < 0.25){
+                    if(Math.random() < 0.15){
                         AttackSequence(map, hero);
                     }
                     break;
@@ -217,7 +217,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                     }
-                    if(Math.random() < 0.25){
+                    if(Math.random() < 0.15){
                         AttackSequence(map, hero);
                     }
                     break;
@@ -243,7 +243,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             break;
                     }
-                    if(Math.random() < 0.25){
+                    if(Math.random() < 0.15){
                         AttackSequence(map, hero);
                     }
                     break;
