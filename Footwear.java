@@ -28,6 +28,6 @@ public class Footwear extends Entity implements ShopItem{
     }
     
     public String getName(){
-        return "Footwear";
+        return this.name;
     }
 }
