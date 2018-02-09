@@ -44,6 +44,7 @@ dependency7.type=UsesDependency
 dependency8.from=Driver
 dependency8.to=Monster
 dependency8.type=UsesDependency
+<<<<<<< HEAD
 dependency9.from=Driver2
 dependency9.to=Entity
 dependency9.type=UsesDependency
@@ -63,6 +64,16 @@ package.frame.height=677
 package.frame.width=874
 package.numDependencies=16
 package.numTargets=10
+=======
+objectbench.height=76
+objectbench.width=658
+package.editor.height=400
+package.editor.width=560
+package.editor.x=173
+package.editor.y=138
+package.numDependencies=8
+package.numTargets=9
+>>>>>>> 608aff95b67adc71db2252f18578973ab1572649
 package.showExtends=true
 package.showUses=true
 project.charset=UTF-8
