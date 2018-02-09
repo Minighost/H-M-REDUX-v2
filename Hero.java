@@ -4,6 +4,7 @@ public class Hero extends Entity{
     private String name;
     private Weapon weapon;
     private Armor armor;
+    private int gold;
 
     public Hero(){
         
@@ -17,6 +18,15 @@ public class Hero extends Entity{
         this.weapon = w;
         this.armor = a;
         this.hides = 0;
+        this.gold = 0;
+    }
+    
+    public int getGold(){
+        return gold;
+    }
+    
+    public void setGold(int newGold){
+        this.gold = newGold;
     }
     
     public int getX(){

@@ -104,7 +104,7 @@ public class Driver2{
         Scanner s = new Scanner(System.in);
         printMap(map);
         while(true){            
-            //System.out.println("\f");
+            System.out.println("\f");
             System.out.println(printMap(map));
 
             String action = s.next();
@@ -194,6 +194,13 @@ public class Driver2{
                     System.out.println("\n---You dealt " + heroDMGdealt + " damage to the " + monster.getName() + "!---" +
                     "\nThe " + monster.getName() + " has " + monster.getHP() + " health left.");
                     if(monster.getHP() == 0){
+                        if(monster.getLevel() == 1){
+                            hero.setGold(hero.getGold() + 25);
+                        }else if(monster.getLevel() == 2){
+                            hero.setGold(hero.getGold() + 50);
+                        }else if(monster.getLevel() == 3){
+                            hero.setGold(hero.getGold() + 75);
+                        }
                         return;
                     }
                     break;
