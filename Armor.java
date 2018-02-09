@@ -30,6 +30,10 @@ public class Armor extends Entity{
         this.y = y;
     }
     
+    public String getName(){
+        return this.name;
+    }
+    
     public int reduceDmg(int dmg){
         int reducedDmg = (int)(dmg - (dmg * dmgReduction));
         return reducedDmg;

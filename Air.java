@@ -1,5 +1,6 @@
 public class Air extends Entity{
     private int x, y;
+    private String name;
     
     public Air(){
     }
@@ -10,6 +11,10 @@ public class Air extends Entity{
     
     public int getY(){
         return this.y;
+    }
+    
+    public String getName(){
+        return this.name;
     }
     
     public void setX(){

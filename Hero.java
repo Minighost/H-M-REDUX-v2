@@ -1,16 +1,22 @@
+import java.util.*;
+
 public class Hero extends Entity{
     private int x, y;
     private int hp, dmg, hides;
     private String name;
     private Weapon weapon;
     private Armor armor;
+<<<<<<< HEAD
     private int gold;
+=======
+    private ArrayList<Entity> pockets;
+>>>>>>> e7b11352dba7e0994d3c97422b8803153a716904
 
     public Hero(){
         
     }
     
-    public Hero(int x, int y, Weapon w, Armor a){
+    public Hero(int x, int y, Weapon w, Armor a, String n){
         this.x = x;
         this.y = y;
         this.hp = 100;
@@ -18,6 +24,7 @@ public class Hero extends Entity{
         this.weapon = w;
         this.armor = a;
         this.hides = 0;
+<<<<<<< HEAD
         this.gold = 0;
     }
     
@@ -27,6 +34,10 @@ public class Hero extends Entity{
     
     public void setGold(int newGold){
         this.gold = newGold;
+=======
+        this.pockets = new ArrayList<Entity>();
+        this.name = n;
+>>>>>>> e7b11352dba7e0994d3c97422b8803153a716904
     }
     
     public int getX(){
@@ -83,6 +94,26 @@ public class Hero extends Entity{
 
     public void setArmor(Armor newArmor){
         this.armor = newArmor;
+    }
+    
+    public boolean addToPockets(Entity e){
+        if(this.pockets.size() > 4){
+            return false;
+        }
+        this.pockets.add(e);
+        return true;
+    }
+    
+    public String getPocketsContents(){
+        String return_str = "";
+        for(int i = 0; i < this.pockets.size(); i++){
+            return_str += pockets.get(i).getName() + ", ";
+        }
+        return return_str;
+    }
+    
+    public String getName(){
+        return this.name;
     }
 
     public String toString(){
