@@ -82,7 +82,7 @@ public class Hero extends Entity{
     }
     
     public boolean addToPockets(Entity e){
-        if(this.pockets.size() > 4){
+        if(this.pockets.size() > 2){
             return false;
         }
         this.pockets.add(e);
