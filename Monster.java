@@ -47,6 +47,10 @@ public class Monster extends Entity{
         return this.name;
     }
     
+    public int getLevel(){
+        return this.level;
+    }
+    
     public void setName(String newName){
         this.name = newName;
     }

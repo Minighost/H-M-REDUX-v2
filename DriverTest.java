@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Driver2{
+public class DriverTest{
     public static void main(String args[]){
         Entity[][] map = new Entity[15][15];
         ArrayList<Entity> entityList = new ArrayList<Entity>();
@@ -10,6 +10,11 @@ public class Driver2{
         int newCoordX = 0;
         int newCoordY = 0;
 
+        Scanner theName = new Scanner(System.in);
+        System.out.println("What is your name?");
+        System.out.print("Name: ");
+        String heroName = theName.next();
+
         // Testing map printout
         for(int i = 0; i < 15; i++){
             for(int j = 0; j < 15; j++){
@@ -17,10 +22,10 @@ public class Driver2{
             }
         }
 
-        // Create obj
+        //create obj
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
         Armor leatherArmor = new Armor(0, 0, 0, "Leather");
-        Hero hero = new Hero(0, 14, dagger, leatherArmor, "Hero");
+        Hero hero = new Hero(0, 14, dagger, leatherArmor, heroName);
         takenCoord[index][0] = hero.getX();
         takenCoord[index][1] = hero.getY();
         index++;
@@ -59,7 +64,7 @@ public class Driver2{
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
         }
-        Potion potion1 = new Potion(newCoordX, newCoordY, "Potion", 50);
+        Potion potion1 = new Potion(newCoordX, newCoordY, "Medium Potion", 50);
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
@@ -82,7 +87,7 @@ public class Driver2{
         takenCoord[index][1] = newCoordY;
         index++;
 
-        // Number of random weapon/armor in map?
+        //number of random weapon/armor in map?
 
         entityList.add(hero); //add all obj to list
         entityList.add(farmer1);
@@ -102,28 +107,113 @@ public class Driver2{
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList, Hero hero){
         Scanner s = new Scanner(System.in);
-        printMap(map);
-        while(true){            
-            //System.out.println("\f");
+        while(true){
+            System.out.println("\f");
             System.out.println(printMap(map));
+
             String action = s.next();
+
             switch(action){
                 case "w":
+                    switch(staticCheck(hero, map, entityList, action).getClass().toString()){
+                        case "class Air":
+                        map[hero.getY()][hero.getX()] = new Air();
+                        hero.setY(hero.getY() - 1);
+                        map[hero.getY()][hero.getX()] = hero;
+                        break;
+                        case "class Farmer":
+                        break;
+                        case "class Potion":
+                        hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                        map[hero.getY()][hero.getX()] = new Air();
+                        hero.setY(hero.getY() - 1);
+                        map[hero.getY()][hero.getX()] = hero;
+                        break;
+                        case "class Weapon":
+                        hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                        map[hero.getY()][hero.getX()] = new Air();
+                        hero.setY(hero.getY() - 1);
+                        map[hero.getY()][hero.getX()] = hero;
+                        break;
+                    }
                     if(Math.random() < 0.25){
                         AttackSequence(map, hero);
                     }
                     break;
                 case "a":
+                    switch(staticCheck(hero, map, entityList, action).getClass().toString()){
+                        case "class Air":
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Farmer":
+                            break;
+                        case "class Potion":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Weapon":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                    }
                     if(Math.random() < 0.25){
                         AttackSequence(map, hero);
                     }
                     break;
                 case "s":
+                    switch(staticCheck(hero, map, entityList, action).getClass().toString()){
+                        case "class Air":
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Farmer":
+                            break;
+                        case "class Potion":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Weapon":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                    }
                     if(Math.random() < 0.25){
                         AttackSequence(map, hero);
                     }
                     break;
                 case "d":
+                    switch(staticCheck(hero, map, entityList, action).getClass().toString()){
+                        case "class Air":
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Farmer":
+                            break;
+                        case "class Potion":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                        case "class Weapon":
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
+                    }
                     if(Math.random() < 0.25){
                         AttackSequence(map, hero);
                     }
@@ -134,6 +224,26 @@ public class Driver2{
                     break;
             }
         }
+    }
+
+    public static Entity staticCheck(Hero hero, Entity[][] map, ArrayList<Entity> EntityList, String action){
+        int x = hero.getX();
+        int y = hero.getY();
+        switch(action){
+            case "w":
+            y -= 1;
+            break;
+            case "a":
+            x -= 1;
+            break;
+            case "s":
+            y += 1;
+            break;
+            case "d":
+            x += 1;
+            break;
+        }
+        return map[y][x];
     }
 
     public static String printMap(Entity[][] map){
@@ -177,7 +287,7 @@ public class Driver2{
         System.out.println("\f");
         while(monster.getHP() > 0){
             int choice = 0;
-            
+
             System.out.println("Your turn!\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
@@ -191,14 +301,14 @@ public class Driver2{
                         monster.setHP(0);
                     }
                     System.out.println("\n---You dealt " + heroDMGdealt + " damage to the " + monster.getName() + "!---" +
-                    "\nThe " + monster.getName() + " has " + monster.getHP() + " health left.");
+                        "\nThe " + monster.getName() + " has " + monster.getHP() + " health left.");
                     if(monster.getHP() == 0){
                         if(monster.getLevel() == 1){
-                            hero.setGold(hero.getGold() + 25);
+                            hero.setHides(hero.getHides() + 25);
                         }else if(monster.getLevel() == 2){
-                            hero.setGold(hero.getGold() + 50);
+                            hero.setHides(hero.getHides() + 50);
                         }else if(monster.getLevel() == 3){
-                            hero.setGold(hero.getGold() + 75);
+                            hero.setHides(hero.getHides() + 75);
                         }
                         return;
                     }
