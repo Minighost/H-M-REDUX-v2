@@ -15,6 +15,10 @@ public class Monster extends Entity{
         this.name = n;
     }
     
+    public int getLevel(){
+        return level;
+    }
+    
     public int getX(){
         return this.x;
     }
