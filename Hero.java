@@ -151,6 +151,7 @@ public class Hero extends Entity{
     }
 
     public String toString(){
-        return "Name: " + this.name + "\nHP: " + this.hp + "\nWeapon: " + this.weapon.toString() + "\nDamage: " + this.dmg + "\nArmor: " + this.armor.getName();
+        return "Name: " + this.name + "\nHP: " + this.hp + "\nWeapon: " + this.weapon.toString() +
+        "\nDamage: " + this.dmg + "\nArmor: " + this.armor.getName() + "\nHides: " + this.getHides();
     }
 }

@@ -236,6 +236,8 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
                             break;
+                        default:
+                            break;
                     }
                     if(Math.random() < 0.15){
                         AttackSequence(map, hero);
@@ -288,17 +290,20 @@ public class Driver{
         int y = hero.getY();
         switch(action){
             case "w":
-            y -= 1;
-            break;
+                y -= 1;
+                break;
             case "a":
-            x -= 1;
-            break;
+                x -= 1;
+                break;
             case "s":
-            y += 1;
-            break;
+                y += 1;
+                break;
             case "d":
-            x += 1;
-            break;
+                x += 1;
+                break;
+        }
+        if(y < 0 || y > 14 || x < 0 || x > 14){
+            return new Air();
         }
         return map[y][x];
     }
