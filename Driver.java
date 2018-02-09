@@ -107,38 +107,68 @@ public class Driver{
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList, Hero hero){
         Scanner s = new Scanner(System.in);
+        String lastAction = "Spawned into the game.";
+        String toNorth = "";
+        String toWest = "";
+        String toSouth = "";
+        String toEast = "";
+        
         while(true){
             System.out.println("\f");
             System.out.println(printMap(map));
-
+            
+            String surroundings = updateSurroundings(hero, map);
+            String[] surrounding_parts = new String[4];
+            
+            System.out.println(surrounding_parts[0]);
+            System.out.println(surrounding_parts[1]);
+            System.out.println(surrounding_parts[2]);
+            System.out.println(surrounding_parts[3]);
+            
+            toNorth = surrounding_parts[0];
+            toWest = surrounding_parts[1];
+            toSouth = surrounding_parts[2];
+            toEast = surrounding_parts[3];
+            
+            System.out.println("\n\nFeed: " + lastAction);
+            System.out.println("\nNorth: " + toNorth);
+            System.out.println("\nWest: " + toWest);
+            System.out.println("\nSouth: "  + toSouth);
+            System.out.println("\nEast: " + toEast);
+            
+            System.out.println("\n\t\tW - North\tE - Inventory");
+            System.out.println("A - West\tS - South\tD - East");
+            
+            System.out.print("Next action: ");
             String action = s.next();
 
             switch(action){
                 case "w":
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
                         case "class Air":
-                        map[hero.getY()][hero.getX()] = new Air();
-                        hero.setY(hero.getY() - 1);
-                        map[hero.getY()][hero.getX()] = hero;
-                        break;
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
                         case "class Farmer":
-                        break;
+                            break;
                         case "class Potion":
-                        hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
-                        map[hero.getY()][hero.getX()] = new Air();
-                        hero.setY(hero.getY() - 1);
-                        map[hero.getY()][hero.getX()] = hero;
-                        break;
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
                         case "class Weapon":
-                        hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
-                        map[hero.getY()][hero.getX()] = new Air();
-                        hero.setY(hero.getY() - 1);
-                        map[hero.getY()][hero.getX()] = hero;
-                        break;
+                            hero.addToPockets(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            break;
                     }
                     if(Math.random() < 0.25){
                         AttackSequence(map, hero);
                     }
+                    
                     break;
                 case "a":
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
@@ -244,6 +274,48 @@ public class Driver{
             break;
         }
         return map[y][x];
+    }
+    
+    public static String updateSurroundings(Hero hero, Entity[][] map){
+        int x = hero.getX();
+        int y = hero.getY();
+        String temp_str = "";
+        String[] sub = new String[2];
+        
+        y--; // north
+        if(y < 0){
+            temp_str += "A wall_";
+        } else {
+            
+            temp_str += map[y][x].getClass().toString() + "_";
+        }
+        y++;
+        
+        x--; // west
+        if(x < 0){
+            temp_str += "A wall_";
+        } else {
+            temp_str += map[y][x].getClass().toString() + "_";
+        }
+        x++;
+        
+        y++; // South.
+        if(y > 14){
+            temp_str += "A wall_";
+        } else {
+            temp_str += map[y][x].getClass().toString() + "_";
+        }
+        y--;
+        
+        x++; // East
+        if(x > 14){
+            temp_str += "A wall_";
+        } else {
+            temp_str += map[y][x].getClass().toString() + "_";
+        }
+        x--;
+        
+        return temp_str;
     }
 
     public static String printMap(Entity[][] map){
