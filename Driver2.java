@@ -102,7 +102,6 @@ public class Driver2{
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList, Hero hero){
         Scanner s = new Scanner(System.in);
-<<<<<<< HEAD:Driver2.java
 <<<<<<< HEAD:DriverTest.java
 <<<<<<< HEAD:Driver2.java
         printMap(map);
@@ -111,11 +110,6 @@ public class Driver2{
         while(true){
 >>>>>>> e7b11352dba7e0994d3c97422b8803153a716904:DriverTest.java
             System.out.println("\f");
-=======
-        printMap(map);
-        while(true){            
-            //System.out.println("\f");
->>>>>>> parent of e7b1135... merging and changing:Driver2.java
 =======
         printMap(map);
         while(true){            
