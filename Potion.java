@@ -1,13 +1,15 @@
 public class Potion extends Entity{
     private int x, y;
     private int potency;
+    private String name;
 
     public Potion(){
     }
     
-    public Potion(int x, int y, int potency){
+    public Potion(int x, int y, String n, int potency){
         this.x = x;
         this.y = y;
+        this.name = n;
         this.potency = potency;
     }
 
@@ -25,6 +27,10 @@ public class Potion extends Entity{
     
     public void setY(int y){
         this.y = y;
+    }
+    
+    public String getName(){
+        return this.name;
     }
     
     public int getPotency(){
