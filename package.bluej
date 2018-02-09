@@ -5,12 +5,9 @@ dependency1.type=UsesDependency
 dependency10.from=Hero
 dependency10.to=Armor
 dependency10.type=UsesDependency
-<<<<<<< HEAD
-=======
 dependency11.from=Hero
 dependency11.to=Potion
 dependency11.type=UsesDependency
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
 dependency2.from=Driver
 dependency2.to=Air
 dependency2.type=UsesDependency
@@ -35,16 +32,6 @@ dependency8.type=UsesDependency
 dependency9.from=Hero
 dependency9.to=Weapon
 dependency9.type=UsesDependency
-<<<<<<< HEAD
-objectbench.height=76
-objectbench.width=1177
-package.editor.height=600
-package.editor.width=1079
-package.editor.x=206
-package.editor.y=44
-package.numDependencies=10
-package.numTargets=10
-=======
 objectbench.height=79
 objectbench.width=658
 package.editor.height=397
@@ -52,8 +39,7 @@ package.editor.width=560
 package.editor.x=173
 package.editor.y=138
 package.numDependencies=11
-package.numTargets=9
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
+package.numTargets=10
 package.showExtends=true
 package.showUses=true
 project.charset=UTF-8
@@ -68,29 +54,24 @@ target1.showInterface=false
 target1.type=AbstractTarget
 target1.typeParameters=
 target1.width=80
-<<<<<<< HEAD
-target1.x=10
-target1.y=140
+target1.x=90
+target1.y=10
+target10.editor.height=700
+target10.editor.width=900
+target10.editor.x=213
+target10.editor.y=158
 target10.height=50
 target10.name=Weapon
 target10.showInterface=false
 target10.type=ClassTarget
 target10.typeParameters=
 target10.width=80
-target10.x=240
-target10.y=10
-target2.editor.height=700
-target2.editor.width=900
-target2.editor.x=246
-target2.editor.y=64
-=======
-target1.x=90
-target1.y=10
+target10.x=100
+target10.y=190
 target2.editor.height=700
 target2.editor.width=900
 target2.editor.x=213
 target2.editor.y=158
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
 target2.height=50
 target2.name=Driver2
 target2.naviview.expanded=true
@@ -98,13 +79,8 @@ target2.showInterface=false
 target2.type=ClassTarget
 target2.typeParameters=
 target2.width=80
-<<<<<<< HEAD
-target2.x=480
-target2.y=480
-=======
 target2.x=180
 target2.y=10
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
 target3.editor.height=700
 target3.editor.width=900
 target3.editor.x=213
@@ -116,135 +92,78 @@ target3.showInterface=false
 target3.type=ClassTarget
 target3.typeParameters=
 target3.width=80
-<<<<<<< HEAD
-target3.x=150
-target3.y=100
-=======
 target3.x=70
 target3.y=70
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
-target4.editor.height=700
-target4.editor.width=900
-target4.editor.x=213
-target4.editor.y=158
 target4.height=50
-<<<<<<< HEAD
 target4.name=Armor
-=======
-target4.name=Monster
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
-target4.naviview.expanded=true
 target4.showInterface=false
 target4.type=ClassTarget
 target4.typeParameters=
 target4.width=80
-<<<<<<< HEAD
-target4.x=150
-target4.y=20
-=======
-target4.x=160
-target4.y=70
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
+target4.x=270
+target4.y=10
 target5.editor.height=700
 target5.editor.width=900
 target5.editor.x=213
 target5.editor.y=158
 target5.height=50
-<<<<<<< HEAD
 target5.name=Monster
-=======
-target5.name=Hero
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
 target5.naviview.expanded=true
 target5.showInterface=false
 target5.type=ClassTarget
 target5.typeParameters=
 target5.width=80
-<<<<<<< HEAD
-target5.x=150
-target5.y=180
-target6.editor.height=1047
-target6.editor.width=899
-target6.editor.x=0
-target6.editor.y=0
+target5.x=160
+target5.y=70
+target6.editor.height=700
+target6.editor.width=900
+target6.editor.x=213
+target6.editor.y=158
 target6.height=50
 target6.name=Hero
-=======
-target5.x=10
-target5.y=130
-target6.editor.height=1056
-target6.editor.width=1936
-target6.editor.x=-8
-target6.editor.y=-8
-target6.height=50
-target6.name=Driver
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
 target6.naviview.expanded=true
 target6.showInterface=false
 target6.type=ClassTarget
 target6.typeParameters=
 target6.width=80
-<<<<<<< HEAD
-target6.x=170
-target6.y=470
+target6.x=10
+target6.y=130
 target7.editor.height=1056
 target7.editor.width=1936
 target7.editor.x=-8
 target7.editor.y=-8
 target7.height=50
 target7.name=Driver
-=======
-target6.x=330
-target6.y=250
-target7.editor.height=700
-target7.editor.width=900
-target7.editor.x=213
-target7.editor.y=158
-target7.height=50
-target7.name=Air
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
 target7.naviview.expanded=true
 target7.showInterface=false
 target7.type=ClassTarget
 target7.typeParameters=
 target7.width=80
-<<<<<<< HEAD
-target7.x=590
-target7.y=140
-=======
-target7.x=190
-target7.y=130
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
+target7.x=330
+target7.y=250
 target8.editor.height=700
 target8.editor.width=900
 target8.editor.x=213
 target8.editor.y=158
 target8.height=50
-<<<<<<< HEAD
 target8.name=Air
-=======
-target8.name=Farmer
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
 target8.naviview.expanded=true
 target8.showInterface=false
 target8.type=ClassTarget
 target8.typeParameters=
 target8.width=80
-target8.x=10
-<<<<<<< HEAD
-target8.y=300
-=======
-target8.y=190
->>>>>>> parent of 79abf5d... Merge branch 'master' of https://github.com/Minighost/H-M-REDUX-v2
+target8.x=190
+target8.y=130
 target9.editor.height=700
 target9.editor.width=900
 target9.editor.x=213
 target9.editor.y=158
 target9.height=50
-target9.name=Weapon
+target9.name=Farmer
+target9.naviview.expanded=true
 target9.showInterface=false
 target9.type=ClassTarget
 target9.typeParameters=
 target9.width=80
-target9.x=100
+target9.x=10
 target9.y=190
