@@ -153,6 +153,11 @@ public class Driver{
 
             switch(action){
                 case "w":
+                    if(hero.getY() == 0){
+                        lastAction = "You hit a wall.";
+                        hero.setHP(hero.getHP() - 1);
+                        break;
+                    }
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
                         case "class Air":
                             map[hero.getY()][hero.getX()] = new Air();
@@ -183,6 +188,11 @@ public class Driver{
                     }
                     break;
                 case "a":
+                    if(hero.getX() == 0){
+                        lastAction = "You hit a wall.";
+                        hero.setHP(hero.getHP() - 1);
+                        break;
+                    }
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
                         case "class Air":
                             map[hero.getY()][hero.getX()] = new Air();
@@ -213,6 +223,11 @@ public class Driver{
                     }
                     break;
                 case "s":
+                    if(hero.getY() == 14){
+                        lastAction = "You hit a wall.";
+                        hero.setHP(hero.getHP() - 1);
+                        break;
+                    }
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
                         case "class Air":
                             map[hero.getY()][hero.getX()] = new Air();
@@ -245,6 +260,11 @@ public class Driver{
                     }
                     break;
                 case "d":
+                    if(hero.getX() == 14){
+                        lastAction = "You hit a wall.";
+                        hero.setHP(hero.getHP() - 1);
+                        break;
+                    }
                     switch(staticCheck(hero, map, entityList, action).getClass().toString()){
                         case "class Air":
                             map[hero.getY()][hero.getX()] = new Air();
@@ -442,6 +462,39 @@ public class Driver{
             }
         }
     }
+    
+    public static void FarmerSeq(Hero hero, Entity[][] map, Farmer farmer){
+        Scanner s = new Scanner(System.in);
+        int choice = 0;
+        
+        System.out.println("\f");
+        System.out.println("You meet a farmer.");
+        pressEnter();
+        while(true){
+            System.out.println("Welcome to the farmer's shop! What can we do for you today?");
+            System.out.println("1. Buy items");
+            System.out.println("2. Buy information");
+            System.out.print("Choice: ");
+            choice = s.nextInt();
+            switch(choice){
+                case 1:
+                    farmer.getShopItems();
+                    System.out.println("\n\n9. Go back");
+                    System.out.print("Choice: ");
+                    choice = s.nextInt();
+                    if(choice == 9){
+                        System.out.println("Purchase cancelled.");
+                        pressEnter();
+                        continue;
+                    }
+                    hero.buyObject(choice + 1, farmer);
+                    break;
+                case 2:
+                    System.out.println("I don't have anything for you right now, please cmon back later.");
+            }
+        }
+    }
+
     
     public static void inventoryMenu(Hero hero){
         Scanner s = new Scanner(System.in);

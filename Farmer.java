@@ -50,6 +50,12 @@ public class Farmer extends Entity{
     public void setName(String newName){
         this.name = newName;
     }
+    
+    public void getShopItems(){
+        for(int i = 0; i < shopItems.length; i++){
+            System.out.println((i + 1) + ". " + shopItems[i]);
+        }
+    }
 
     public String toString(){
         return "Name: " + this.name;
