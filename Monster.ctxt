@@ -1,5 +1,6 @@
 #BlueJ class context
 <<<<<<< HEAD
+<<<<<<< HEAD
 comment0.params=
 comment0.target=Monster()
 comment1.params=x\ y\ h\ l\ n
@@ -24,6 +25,8 @@ comment9.params=
 comment9.target=java.lang.String\ getName()
 numComments=11
 =======
+=======
+>>>>>>> parent of e7b1135... merging and changing
 comment0.target=Monster
 comment1.params=
 comment1.target=Monster()
@@ -50,4 +53,7 @@ comment8.target=int\ getHP()
 comment9.params=newHP
 comment9.target=void\ setHP(int)
 numComments=13
+<<<<<<< HEAD
+>>>>>>> parent of e7b1135... merging and changing
+=======
 >>>>>>> parent of e7b1135... merging and changing
