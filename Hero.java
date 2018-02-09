@@ -134,6 +134,9 @@ public class Hero extends Entity{
         }
     }
     
+    public Entity[] getHardStorage(){
+        return this.storage;
+    }
     
     public String getPocketsContents(){
         String return_str = "";
@@ -148,6 +151,6 @@ public class Hero extends Entity{
     }
 
     public String toString(){
-        return "Name: " + this.name + ", HP: " + this.hp + ", Weapon: " + this.weapon.toString() + ", Damage: " + this.dmg + ", Armor: " + this.armor.toString();
+        return "Name: " + this.name + "\nHP: " + this.hp + "\nWeapon: " + this.weapon.toString() + "\nDamage: " + this.dmg + "\nArmor: " + this.armor.getName();
     }
 }

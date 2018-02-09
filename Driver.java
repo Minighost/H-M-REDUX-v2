@@ -117,13 +117,12 @@ public class Driver{
             System.out.println("\f");
             System.out.println(printMap(map));
             
-            String surroundings = updateSurroundings(hero, map);
-            String[] surrounding_parts = new String[4];
+            System.out.println("-- Info --");
+            System.out.println(hero);
+            System.out.println("Inventory: " + hero.getHardStorage().length + " items\n");
             
-            System.out.println(surrounding_parts[0]);
-            System.out.println(surrounding_parts[1]);
-            System.out.println(surrounding_parts[2]);
-            System.out.println(surrounding_parts[3]);
+            String surroundings = updateSurroundings(hero, map);
+            String[] surrounding_parts = surroundings.split("_");
             
             toNorth = surrounding_parts[0];
             toWest = surrounding_parts[1];
@@ -139,7 +138,7 @@ public class Driver{
             System.out.println("\n\t\tW - North\tE - Inventory");
             System.out.println("A - West\tS - South\tD - East");
             
-            System.out.print("Next action: ");
+            System.out.print("\nNext action: ");
             String action = s.next();
 
             switch(action){
@@ -149,6 +148,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() - 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Moved North";
                             break;
                         case "class Farmer":
                             break;
@@ -157,16 +157,19 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() - 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up potion";
                             break;
                         case "class Weapon":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() - 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up weapon";
                             break;
                     }
                     if(Math.random() < 0.15){
                         AttackSequence(map, hero);
+                        lastAction = "Fought monster";
                     }
                     break;
                 case "a":
@@ -175,6 +178,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Moved West";
                             break;
                         case "class Farmer":
                             break;
@@ -183,16 +187,19 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up potion";
                             break;
                         case "class Weapon":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up weapon";
                             break;
                     }
                     if(Math.random() < 0.15){
                         AttackSequence(map, hero);
+                        lastAction = "Fought monster";
                     }
                     break;
                 case "s":
@@ -201,6 +208,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() + 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Moved South";
                             break;
                         case "class Farmer":
                             break;
@@ -209,16 +217,19 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() + 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up potion";
                             break;
                         case "class Weapon":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() + 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up weapon";
                             break;
                     }
                     if(Math.random() < 0.15){
                         AttackSequence(map, hero);
+                        lastAction = "Fought monster";
                     }
                     break;
                 case "d":
@@ -227,6 +238,7 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Moved East";
                             break;
                         case "class Farmer":
                             break;
@@ -235,16 +247,19 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up potion";
                             break;
                         case "class Weapon":
                             hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up weapon";
                             break;
                     }
                     if(Math.random() < 0.15){
                         AttackSequence(map, hero);
+                        lastAction = "Fought monster";
                     }
                     break;
                 case "kill":
@@ -285,8 +300,8 @@ public class Driver{
         if(y < 0){
             temp_str += "A wall_";
         } else {
-            
-            temp_str += map[y][x].getClass().toString() + "_";
+            sub = map[y][x].getClass().toString().split(" ");
+            temp_str += sub[1] + "_";
         }
         y++;
         
@@ -294,7 +309,8 @@ public class Driver{
         if(x < 0){
             temp_str += "A wall_";
         } else {
-            temp_str += map[y][x].getClass().toString() + "_";
+            sub = map[y][x].getClass().toString().split(" ");
+            temp_str += sub[1] + "_";
         }
         x++;
         
@@ -302,7 +318,8 @@ public class Driver{
         if(y > 14){
             temp_str += "A wall_";
         } else {
-            temp_str += map[y][x].getClass().toString() + "_";
+            sub = map[y][x].getClass().toString().split(" ");
+            temp_str += sub[1] + "_";
         }
         y--;
         
@@ -310,7 +327,8 @@ public class Driver{
         if(x > 14){
             temp_str += "A wall_";
         } else {
-            temp_str += map[y][x].getClass().toString() + "_";
+            sub = map[y][x].getClass().toString().split(" ");
+            temp_str += sub[1] + "_";
         }
         x--;
         
@@ -319,8 +337,9 @@ public class Driver{
 
     public static String printMap(Entity[][] map){
         String s = "";
-        for(Entity[] r : map){
-            for(Object i : r){
+        for(int r = 0; r < 15; r++){
+            for(int c = 0; c < 15; c++){
+                Object i = map[r][c];
                 if((i.getClass().isInstance(new Hero()))){
                     s = s + "Hero\t";
                 }else if((i.getClass().isInstance(new Weapon()))){
@@ -337,7 +356,7 @@ public class Driver{
                     s = s + ".\t";
                 }
             }
-            s = s + "\n\n";
+            s += "\n";
         }
         return s;
     }
