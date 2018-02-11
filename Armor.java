@@ -50,6 +50,6 @@ public class Armor extends Entity implements ShopItem{
     }
     
     public String toString(){
-        return this.name;
+        return "Armor";
     }
 }

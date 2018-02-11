@@ -6,6 +6,12 @@ public class Weapon extends Entity{
     public Weapon(){
     }
     
+    public Weapon(int minDmg, int maxDmg, String name){
+        this.minDmg = minDmg;
+        this.maxDmg = maxDmg;
+        this.name = name;
+    }
+    
     public Weapon(int x, int y, int minDmg, int maxDmg, String n){
         this.minDmg = minDmg;
         this.maxDmg = maxDmg;

@@ -13,7 +13,7 @@ public class Hero extends Entity{
     public Hero(){
     }
     
-    public Hero(int x, int y, Weapon w, Armor a, String n){
+    public Hero(int x, int y, Weapon w, Armor a, int hides, String n){
         this.x = x;
         this.y = y;
         this.hp = 100;
@@ -23,6 +23,7 @@ public class Hero extends Entity{
         this.hides = 0;
         this.storage = new Entity[2];
         this.name = n;
+        this.hides = hides;
         this.footwear = new Footwear(0, "Bare Feet", 0);
     }
     
@@ -151,7 +152,7 @@ public class Hero extends Entity{
     }
 
     public String toString(){
-        return "Name: " + this.name + "\nHP: " + this.hp + "\nWeapon: " + this.weapon.toString() +
+        return "Name: " + this.name + "\nHP: " + this.hp + "\nWeapon: " + this.weapon.getName() +
         "\nDamage: " + this.dmg + "\nArmor: " + this.armor.getName() + "\nHides: " + this.getHides();
     }
 }

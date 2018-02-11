@@ -7,7 +7,7 @@ public class Potion extends Entity implements ShopItem{
     public Potion(){
     }
     
-    public Potion(String n, int potency, int price){
+    public Potion(String name, int potency, int price){
         this.name = name;
         this.potency = potency;
         this.price = price;

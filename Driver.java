@@ -3,6 +3,7 @@ import java.io.*;
 
 public class Driver{
     public static void main(String args[]){
+        Hero hero;
         Entity[][] map = new Entity[15][15];
         ArrayList<Entity> entityList = new ArrayList<Entity>();
         int[][] takenCoord = new int[7][2];
@@ -24,8 +25,13 @@ public class Driver{
 
         //create obj
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
-        Armor leatherArmor = new Armor(0, 0, 0, "Leather");
-        Hero hero = new Hero(0, 14, dagger, leatherArmor, heroName);
+        Armor leatherArmor = new Armor(0, 0, 0, "Leather Chestplate");
+        if(heroName.equals("godmode")){
+            hero = new Hero(0, 14, new Weapon(1000, 1000, "God Sword"), new Armor(1, "God Plate", 0), 99999, "godmode");
+        }else{
+            hero = new Hero(0, 14, dagger, leatherArmor, 0, heroName);
+        }
+
         takenCoord[index][0] = hero.getX();
         takenCoord[index][1] = hero.getY();
         index++;
@@ -73,7 +79,7 @@ public class Driver{
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
         }
-        Armor bronzeArmor = new Armor(newCoordX, newCoordY, 30, "bronze");
+        Armor bronzeArmor = new Armor(newCoordX, newCoordY, 30, "Bronze Armor");
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
@@ -183,6 +189,8 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
                             break;
+                        default:
+                            break;
                     }
                     if(Math.random() < monsterChance){
                         AttackSequence(map, hero);
@@ -218,6 +226,8 @@ public class Driver{
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
+                            break;
+                        default:
                             break;
                     }
                     if(Math.random() < monsterChance){
@@ -287,11 +297,13 @@ public class Driver{
                             lastAction = "Picked up potion";
                             break;
                         case "class Weapon":
-                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY()][hero.getX() + 1]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
+                            break;
+                        default:
                             break;
                     }
                     if(Math.random() < monsterChance){

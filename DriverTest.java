@@ -25,7 +25,7 @@ public class DriverTest{
         //create obj
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
         Armor leatherArmor = new Armor(0, 0, 0, "Leather");
-        Hero hero = new Hero(0, 14, dagger, leatherArmor, heroName);
+        Hero hero = new Hero(0, 14, dagger, leatherArmor, 0, heroName);
         takenCoord[index][0] = hero.getX();
         takenCoord[index][1] = hero.getY();
         index++;
