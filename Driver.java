@@ -129,7 +129,7 @@ public class Driver{
             if(item_counter == 1){
                 System.out.println("Inventory: " + item_counter + " item\n");
             } else {
-                System.out.println("Inventory: " + item_counter + " items\n");
+                System.out.println("Inventory: " + item_counter + "/" + (hero.getHardStorage()).length + " items\n");
             }
             
             String surroundings = updateSurroundings(hero, map);
