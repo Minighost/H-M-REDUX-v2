@@ -59,7 +59,7 @@ public class Farmer extends Entity{
                 s = s + n + ". SOLD OUT\n";
                 continue;
             }
-            s = s + n + ". " + this.shopItems[i].getName() + "\n";
+            s = s + n + ". " + this.shopItems[i].getName() + "\t" + this.shopItems[i].getPrice() +"Hides\n";
         }
         System.out.println(s);
     }

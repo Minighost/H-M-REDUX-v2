@@ -221,7 +221,7 @@ public class Driver{
                             lastAction = "Picked up potion";
                             break;
                         case "class Weapon":
-                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY()][hero.getX() - 1]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
@@ -502,12 +502,16 @@ public class Driver{
                         System.out.println("Purchase cancelled.");
                         pressEnter();
                         continue;
+                    } else {
+                        System.out.println("
                     }
                     hero.buyObject(choice, farmer);
                     break;
                 case 2:
                     System.out.println("I don't have anything for you right now. Please c'mon back later!");
                 case 3:
+                    System.out.println("Shop exited.");
+                    pressEnter();
                     return;
             }
         }
