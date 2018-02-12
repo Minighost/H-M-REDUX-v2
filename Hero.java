@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class Hero extends Entity{
@@ -10,6 +11,7 @@ public class Hero extends Entity{
     private Footwear footwear;
     int index = 0;
     private boolean phoenixMode;
+    private boolean hasBomb;
 
     public Hero(){
     }
@@ -58,7 +60,7 @@ public class Hero extends Entity{
                 index++;
             }
             if((item.getClass()).isInstance(new Satchel(0, null, 0))){
-                Entity[] newStorage = new Entity[((Satchel)item).getSize()];
+                storage = Arrays.copyOf(storage, ((Satchel)item).getSize());
             }
             if((item.getClass()).isInstance(new Footwear(0, null, 0))){
                 footwear = (Footwear)item;
@@ -164,6 +166,14 @@ public class Hero extends Entity{
     
     public void setPhoenixMode(boolean mode){
         this.phoenixMode = mode;
+    }
+    
+    public boolean hasBomb(){
+        return hasBomb;
+    }
+    
+    public void setHasBomb(boolean hasBomb){
+        this.hasBomb = hasBomb;
     }
     
     public Entity[] getHardStorage(){

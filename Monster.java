@@ -40,7 +40,8 @@ public class Monster extends Entity{
     }
     
     public int getDMG(){
-        return this.level;
+        int dmg = (int)(Math.random() * 20) + (10 * level);
+        return dmg;
     }
     
     public String getName(){

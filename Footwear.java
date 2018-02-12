@@ -23,6 +23,10 @@ public class Footwear extends Entity implements ShopItem{
         return 0;
     }
     
+    public double getChanceInc(){
+        return chanceInc;
+    }
+    
     public int getPrice(){
         return price;
     }

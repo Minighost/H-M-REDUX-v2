@@ -7,7 +7,7 @@ public class Driver{
         Hero hero;
         Entity[][] map = new Entity[15][15];
         ArrayList<Entity> entityList = new ArrayList<Entity>();
-        int[][] takenCoord = new int[7][2];
+        int[][] takenCoord = new int[10][2];
         int index = 0;
         int newCoordX = 0;
         int newCoordY = 0;
@@ -28,7 +28,9 @@ public class Driver{
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
         Armor leatherArmor = new Armor(0, 0, 0, "Leather Chestplate");
         if(heroName.equals("godmode")){
-            hero = new Hero(0, 14, new Weapon(1000, 1000, "God Sword"), new Armor(1, "God Plate", 0), 99999, "godmode");
+            hero = new Hero(0, 14, new Weapon(1200, 2000, "God Sword"), new Armor(1, "God Plate", 0), 999999, "TESTER");
+            hero.setFootwear(new Footwear(1, "God Boots", 0));
+            hero.setPhoenixMode(true);
         }else{
             hero = new Hero(0, 14, dagger, leatherArmor, 0, heroName);
         }
@@ -93,6 +95,33 @@ public class Driver{
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
+        
+        while(checkCoord(takenCoord, newCoordX, newCoordY) == false){
+            newCoordX = (int)(Math.random() * 15);
+            newCoordY = (int)(Math.random()*15);
+        }
+        Boss boss1 = new Boss("Glog the Slug", newCoordX, newCoordY, 175, 20, 1, 4, "Glub glub");
+        takenCoord[index][0] = newCoordX;
+        takenCoord[index][1] = newCoordY;
+        index++;
+        
+        while(checkCoord(takenCoord, newCoordX, newCoordY) == false){
+            newCoordX = (int)(Math.random() * 15);
+            newCoordY = (int)(Math.random()*15);
+        }
+        Boss boss2 = new Boss("Mikmik the Troll", newCoordX, newCoordY, 150, 35, 3, 5, "My treasure! Mine!");
+        takenCoord[index][0] = newCoordX;
+        takenCoord[index][1] = newCoordY;
+        index++;
+        
+        while(checkCoord(takenCoord, newCoordX, newCoordY) == false){
+            newCoordX = (int)(Math.random() * 15);
+            newCoordY = (int)(Math.random()*15);
+        }
+        Boss boss3 = new Boss("Malkos the Slayer", newCoordX, newCoordY, 200, 40, 2, 6, "Cold as death!");
+        takenCoord[index][0] = newCoordX;
+        takenCoord[index][1] = newCoordY;
+        index++;
 
         //number of random weapon/armor in map?
 
@@ -103,6 +132,9 @@ public class Driver{
         entityList.add(potion1);
         entityList.add(bronzeArmor);
         entityList.add(shadowbane_curse);
+        entityList.add(boss1);
+        entityList.add(boss2);
+        entityList.add(boss3);
 
         for(int i = 0; i < entityList.size(); i++){ //set all obj to map
             Entity currentObj = entityList.get(i);
@@ -119,7 +151,7 @@ public class Driver{
         String toWest = "";
         String toSouth = "";
         String toEast = "";
-        double monsterChance = 0.15; //Hardcoded Monster Creation chance; default = 0.15
+        double monsterChance = 0.25; //Hardcoded Monster Creation chance; default = 0.15
         
         while(true){
             System.out.println("\f");
@@ -344,6 +376,9 @@ public class Driver{
                 default:
                     break;
             }
+            if(hero.getHP() <= 0){
+                return;
+            }
         }
     }
 
@@ -454,15 +489,37 @@ public class Driver{
         Monster monster = new Monster(hero.getX(), hero.getY(), tempHP, level, tempName);
         System.out.println("A wild " + monster.getName() + " appeared!");
         pressEnter();
-        while(monster.getHP() > 0){
+        System.out.println("\f");
+        int turn = 0;
+        while(true){
+            if(monster.getHP() < 0){
+                break;
+            }
+            int dmgReceived = monster.getDMG();
+            if(turn > 0){
+                System.out.println("You took " + dmgReceived + " damage from " + monster.getName() + "!");
+            }
+            if(hero.getHP() <= 0){
+                if(hero.hasPhoenix() == true){
+                    System.out.println("\n---------Phoenix Mode has been triggered! Heroes never die!---------\n");
+                    hero.setHP(100);
+                    hero.setPhoenixMode(false);
+                }else{
+                    System.out.println("\f\n\n\t\t\tYOU HAVE DIED");
+                    return;
+                }
+            }
             int choice = 0;
-            System.out.println("\f");
             
-            System.out.println("Hero stats: HP-" + hero.getHP() + ", Weapon-" + hero.getWeapon().getName() + ", Armor-" + hero.getArmor().getName());
+            System.out.println("---------TURN " + (turn + 1) + "---------");
+            System.out.println("Hero stats: HP - " + hero.getHP() + ", Weapon - " + hero.getWeapon().getName() + ", Armor - " + hero.getArmor().getName());
             System.out.println("Monster stats: HP-" + monster.getHP() + ", Level-" + monster.getLevel());
             System.out.println("Your turn!\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
+            if(hero.hasBomb() == true){
+                System.out.println("3. Use Bomb (Instant Kill)");
+            }
             try{
                 choice = s.nextInt();
             } catch (InputMismatchException e){
@@ -475,7 +532,7 @@ public class Driver{
             switch(choice){
                 case 1:
                     System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the monster!");
-                    int heroDMGdealt = (int)(Math.random()*hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                    int heroDMGdealt = (int)(Math.random() * hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
                     monster.setHP(monster.getHP() - heroDMGdealt);
                     if(monster.getHP() < 0){
                         monster.setHP(0);
@@ -502,11 +559,16 @@ public class Driver{
                 case 2:
                     boolean hasRun = false;
                     double chance = Math.random();
-                    if(monster.getLevel() == 1 && chance < 0.75){
+                    double chanceInc = (hero.getFootwear()).getChanceInc();
+                    chance = chance + chanceInc;
+                    if(monster.getLevel() == 1 && chance > 0.25){
                         hasRun = true;
-                    }else if(monster.getLevel() == 2 && chance < 0.5){
+                    }else if(monster.getLevel() == 2 && chance > 0.5){
                         hasRun = true;
-                    }else if(monster.getLevel() == 3 && chance < 0.25){
+                    }else if(monster.getLevel() == 3 && chance > 0.75){
+                        hasRun = true;
+                    }
+                    else if(monster.getLevel() >=4 && chance > 0.9){
                         hasRun = true;
                     }
                     if(hasRun == true){
@@ -515,10 +577,19 @@ public class Driver{
                         return;
                     }
                     break;
+                case 3:
+                    if(hero.hasBomb() == true){
+                        monster.setHP(0);
+                        break;
+                    }else{
+                        continue;
+                    }
                 default:
                     System.out.println("Uh oh, you broke");
                     break;
             }
+            hero.setHP(hero.getHP() - dmgReceived);
+            turn++;
         }
     }
     
@@ -609,6 +680,7 @@ public class Driver{
                         System.out.println((i + 1) + ". " + list[i].getName());
                     }
                 }
+                System.out.println("\n7. Exit");
                 System.out.println("\nChoice: ");
                 try{
                     choice = s.nextInt();
@@ -620,12 +692,16 @@ public class Driver{
                     continue;
                 }
                 choice--;
-                if(choice >= list.length || list[choice] == null){
+                if(choice >= list.length || list[choice] == null || choice == 7){
                     break;
                 }
                 Entity item = list[choice];
                 if((item.getClass()).isInstance(new Potion(null, 0, 0))){
-                    hero.setHP(hero.getHP() + ((Potion)item).getPotency());
+                    if((((Potion)item).getName()).equals("Phoenix Potion")){
+                        hero.setPhoenixMode(true);
+                    }else{
+                        hero.setHP(hero.getHP() + ((Potion)item).getPotency());
+                    }
                     list[choice] = null;
                     for(int m = choice; m < list.length - 1; m++){
                         list[m] = list[m + 1];
