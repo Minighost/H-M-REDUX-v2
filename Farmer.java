@@ -11,7 +11,7 @@ public class Farmer extends Entity{
         this.x = x;
         this.y = y;
         this.name = n;
-        shopItems = new Entity[8];
+        shopItems = new Entity[10];
         shopItems[0] = new Potion("Lesser Potion", 25, 50);
         shopItems[1] = new Potion("Medium Potion", 50, 75);
         shopItems[2] = new Potion("Greater Potion", 75, 100);
@@ -20,6 +20,8 @@ public class Farmer extends Entity{
         shopItems[5] = new Armor(0.25, "Guard's Plate", 125);
         shopItems[6] = new Satchel(6, "6-Slotted Satchel", 100);
         shopItems[7] = new Footwear(0.5, "Leather Sandals", 75);
+        shopItems[8] = new Weapon("Short Sword", 35, 40, 50);
+        shopItems[9] = new Weapon("Battle Axe", 90, 150, 150);
     }
     
     public ShopItem getItem(int number){

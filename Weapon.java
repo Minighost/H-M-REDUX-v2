@@ -1,9 +1,17 @@
-public class Weapon extends Entity{
+public class Weapon extends Entity implements ShopItem{
     private int minDmg, maxDmg;
     private int x, y;
     private String name;
+    private int price;
     
     public Weapon(){
+    }
+    
+    public Weapon(String n, int min, int max, int price){
+        this.name = name;
+        this.minDmg = min;
+        this.maxDmg = max;
+        this.price = price;
     }
     
     public Weapon(int minDmg, int maxDmg, String name){
@@ -54,6 +62,10 @@ public class Weapon extends Entity{
     
     public String getName(){
         return this.name;
+    }
+    
+    public int getPrice(){
+        return this.price;
     }
 
     public String toString(){

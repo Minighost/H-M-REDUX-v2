@@ -1,21 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-// STORY INACTIVE, DELETE COMMENT START AND END TO MAKE STORY ACTIVE
-
-//ENSURE ENDING WORKS
-
-//SERIOUSLY WTF
-
-// TRENTON READ ABOVE
-
-// PLS
-
-// :(
-
-// D:
-
-// >:(
+//COMPLETED VERSION 2/12/2018 - 1:26 am
 
 
 public class Driver{
@@ -28,7 +14,7 @@ public class Driver{
         int newCoordX = 0;
         int newCoordY = 0;
         
-        /*System.out.println("\f\n\tI could tell you an amazing fantasy story about a great old castle with " + 
+        System.out.println("\f\n\tI could tell you an amazing fantasy story about a great old castle with " + 
         "good kings and evil kings, princes and princesses, knights and heroes.");
         pressEnter();
         System.out.println("\f\n\tIt all starts in Nebus,an old yet dainty town. But unlike everywhere else in the land...");
@@ -53,14 +39,14 @@ public class Driver{
         "entered and appeared on the land. They wreaked havoc and brought chaos.");
         pressEnter();
         System.out.println("\f\n\tThat's where you come in.");
-        */
+        
 
         Scanner theName = new Scanner(System.in);
         System.out.println("I'm sorry, I didn't catch your name...");
         System.out.print("Name: ");
         String heroName = theName.next();
         
-        /*
+        
         System.out.println("\f\n\tAh, " + heroName + ", a pleasure to meet you. Oh my, where are my \n" + 
         "manners? My name's Apex, and I served in the 38th Battalion back in the day...but these\n" + 
         "old bones are as rusty as my armor! Like I said, I could have told you a nice dainty\n" + 
@@ -69,7 +55,7 @@ public class Driver{
         System.out.println("\f\n\tBut that'd be a lie. Your story is about hacking and slashing through the\n" +
         "many hellspawns of the Dark Circle. No romance, no preparations. Now, let's get to the killing!");
         pressEnter();
-        */
+        
         
         // Testing map printout
         for(int i = 0; i < 15; i++){
