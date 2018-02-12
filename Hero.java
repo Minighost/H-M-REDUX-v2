@@ -29,12 +29,14 @@ public class Hero extends Entity{
     
     public void buyObject(int objectNumber, Farmer farmer){
         if(index >= storage.length){
-            System.out.println("Looks like you don't have any space to hold anything else!");
             return;
         }
-        ShopItem item = farmer.getItem(objectNumber-1);
+        if(objectNumber == 0 || objectNumber > 9){
+            return;
+        }
+        ShopItem item = farmer.getItem(objectNumber - 1);
         if(hides < item.getPrice()){
-            System.out.println("Insufficient hides...");
+            return;
         }else{
             farmer.shopItems[objectNumber-1] = null;
             hides -= item.getPrice();
@@ -56,6 +58,7 @@ public class Hero extends Entity{
             if((item.getClass()).isInstance(new Footwear(0, null, 0))){
                 footwear = (Footwear)item;
             }
+            System.out.println(item.toString() + " bought.");
         }
     }
     
@@ -115,6 +118,13 @@ public class Hero extends Entity{
         this.armor = newArmor;
     }
     
+    public Footwear getFootwear(){
+        return footwear;
+    }
+    
+    public void setFootwear(Footwear footwear){
+        this.footwear = footwear;
+    }
     
     public void addToStorage(Entity item){
         if(index >= storage.length){
@@ -133,6 +143,14 @@ public class Hero extends Entity{
                 index++;
             }
         }
+    }
+    
+    public int getIndex(){
+        return index;
+    }
+    
+    public void setIndex(int newIndex){
+        this.index = newIndex;
     }
     
     public Entity[] getHardStorage(){

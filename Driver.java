@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 
+
 public class Driver{
     public static void main(String args[]){
         Hero hero;
@@ -132,11 +133,7 @@ public class Driver{
                     item_counter++;
                 }
             }
-            if(item_counter == 1){
-                System.out.println("Inventory: " + item_counter + " item\n");
-            } else {
-                System.out.println("Inventory: " + item_counter + "/" + (hero.getHardStorage()).length + " items\n");
-            }
+            System.out.println("Inventory: " + item_counter + "/" + (hero.getHardStorage()).length + " items\n");
             
             String surroundings = updateSurroundings(hero, map);
             String[] surrounding_parts = surroundings.split("_");
@@ -189,6 +186,13 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
                             break;
+                        case "class Armor":
+                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up armor";
+                            break;
                         default:
                             break;
                     }
@@ -211,10 +215,10 @@ public class Driver{
                             lastAction = "Moved West";
                             break;
                         case "class Farmer":
-                            FarmerSeq(hero, map, (Farmer)map[hero.getY()][hero.getX()-1]);
+                            FarmerSeq(hero, map, (Farmer)map[hero.getY()][hero.getX() - 1]);
                             break;
                         case "class Potion":
-                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY()][hero.getX() - 1]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
@@ -226,6 +230,13 @@ public class Driver{
                             hero.setX(hero.getX() - 1);
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
+                            break;
+                        case "class Armor":
+                            hero.addToStorage(map[hero.getY()][hero.getX() - 1]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() - 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up armor";
                             break;
                         default:
                             break;
@@ -249,21 +260,28 @@ public class Driver{
                             lastAction = "Moved South";
                             break;
                         case "class Farmer":
-                            FarmerSeq(hero, map, (Farmer)map[hero.getY()+1][hero.getX()]);
+                            FarmerSeq(hero, map, (Farmer)map[hero.getY() + 1][hero.getX()]);
                             break;
                         case "class Potion":
-                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() + 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() + 1);
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up potion";
                             break;
                         case "class Weapon":
-                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY() + 1][hero.getX()]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setY(hero.getY() + 1);
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
+                            break;
+                        case "class Armor":
+                            hero.addToStorage(map[hero.getY() + 1][hero.getX()]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setY(hero.getY() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up armor";
                             break;
                         default:
                             break;
@@ -290,7 +308,7 @@ public class Driver{
                             FarmerSeq(hero, map, (Farmer)map[hero.getY()][hero.getX()+1]);
                             break;
                         case "class Potion":
-                            hero.addToStorage(map[hero.getY() - 1][hero.getX()]);
+                            hero.addToStorage(map[hero.getY()][hero.getX() + 1]);
                             map[hero.getY()][hero.getX()] = new Air();
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
@@ -302,6 +320,13 @@ public class Driver{
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up weapon";
+                            break;
+                        case "class Armor":
+                            hero.addToStorage(map[hero.getY()][hero.getX() + 1]);
+                            map[hero.getY()][hero.getX()] = new Air();
+                            hero.setX(hero.getX() + 1);
+                            map[hero.getY()][hero.getX()] = hero;
+                            lastAction = "Picked up armor";
                             break;
                         default:
                             break;
@@ -489,7 +514,7 @@ public class Driver{
         pressEnter();
         while(true){
             System.out.println("\fWelcome to the Farmer's Shoppe! What can we do for you today?");
-            System.out.println("1. Buy items\n2. Buy information\n3. Exit Shop\n");
+            System.out.println("1. Buy Items\n2. Buy Information\n3. Exit Shop\n");
             System.out.print("Choice: ");
             choice = s.nextInt();
             switch(choice){
@@ -503,7 +528,7 @@ public class Driver{
                         pressEnter();
                         continue;
                     } else {
-                        System.out.println("
+                        hero.buyObject(choice, farmer);
                     }
                     hero.buyObject(choice, farmer);
                     break;
@@ -520,7 +545,6 @@ public class Driver{
     
     public static void inventoryMenu(Hero hero){
         Scanner s = new Scanner(System.in);
-        
         Entity[] list = hero.getHardStorage();
         
         while(true){
@@ -531,7 +555,7 @@ public class Driver{
                 }
             }
             System.out.println("What would you like to do?");
-            System.out.println("1. Equip item");
+            System.out.println("1. Use/Equip Item");
             System.out.println("2. Quit");
             System.out.print("Choice: ");
             
@@ -542,15 +566,52 @@ public class Driver{
             }
             if(choice == 1){
                 System.out.println("\f");
-                System.out.println("Which item would you like to equip?");
+                System.out.println("Which item would you like to use/equip?");
                 for(int i = 0; i < list.length; i++){
                     if(list[i] != null){
-                        System.out.println((i + 1) + ". " + list[i]);
+                        System.out.println((i + 1) + ". " + list[i].getName());
                     }
                 }
                 System.out.println("\nChoice: ");
                 choice = s.nextInt();
                 choice--;
+                if(choice >= list.length || list[choice] == null){
+                    break;
+                }
+                Entity item = list[choice];
+                if((item.getClass()).isInstance(new Potion(null, 0, 0))){
+                    hero.setHP(hero.getHP() + ((Potion)item).getPotency());
+                    list[choice] = null;
+                    for(int m = choice; m < list.length - 1; m++){
+                        list[m] = list[m + 1];
+                    }
+                    list[list.length - 1] = null;
+                    hero.setIndex(hero.getIndex() - 1);
+                }else if((item.getClass()).isInstance(new Weapon(0, 0, null))){
+                    hero.setWeapon((Weapon)item);
+                    list[choice] = null;
+                    for(int m = choice; m < list.length - 1; m++){
+                        list[m] = list[m + 1];
+                    }
+                    list[list.length - 1] = null;
+                    hero.setIndex(hero.getIndex() - 1);
+                }else if((item.getClass()).isInstance(new Armor(0, null, 0))){
+                    hero.setArmor((Armor)item);
+                    list[choice] = null;
+                    for(int m = choice; m < list.length - 1; m++){
+                        list[m] = list[m + 1];
+                    }
+                    list[list.length - 1] = null;
+                    hero.setIndex(hero.getIndex() - 1);
+                }else if((item.getClass()).isInstance(new Footwear(0, null, 0))){
+                    hero.setFootwear((Footwear)item);
+                    list[choice] = null;
+                    for(int m = choice; m < list.length - 1; m++){
+                        list[m] = list[m + 1];
+                    }
+                    list[list.length - 1] = null;
+                    hero.setIndex(hero.getIndex() - 1);
+                }
                 break;
             }
         }
@@ -573,6 +634,7 @@ public class Driver{
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
+    
 
     public static void pressEnter(){
         Scanner s = new Scanner(System.in);
