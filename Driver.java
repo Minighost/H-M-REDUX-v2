@@ -516,7 +516,13 @@ public class Driver{
             System.out.println("\fWelcome to the Farmer's Shoppe! What can we do for you today?");
             System.out.println("1. Buy Items\n2. Buy Information\n3. Exit Shop\n");
             System.out.print("Choice: ");
-            choice = s.nextInt();
+            try{
+                choice = s.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("Not an option, please try again!");
+                pressEnter();
+                continue;
+            }
             switch(choice){
                 case 1:
                     farmer.getShopItems();
@@ -524,16 +530,19 @@ public class Driver{
                     System.out.print("Choice: ");
                     choice = s.nextInt();
                     if(choice == 9){
-                        System.out.println("Purchase cancelled.");
+                        System.out.println("\nPurchase cancelled.\n");
                         pressEnter();
                         continue;
                     } else {
                         hero.buyObject(choice, farmer);
+                        System.out.println("");
+                        pressEnter();
                     }
-                    hero.buyObject(choice, farmer);
                     break;
                 case 2:
-                    System.out.println("I don't have anything for you right now. Please c'mon back later!");
+                    System.out.println("\nI don't have anything for you right now. Please c'mon back later!\n");
+                    pressEnter();
+                    break;
                 case 3:
                     System.out.println("Shop exited.");
                     pressEnter();

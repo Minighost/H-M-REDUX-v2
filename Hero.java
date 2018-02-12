@@ -35,6 +35,10 @@ public class Hero extends Entity{
             return;
         }
         ShopItem item = farmer.getItem(objectNumber - 1);
+        if(item == null){
+            System.out.println("Cannot purchase.");
+            return;
+        }
         if(hides < item.getPrice()){
             return;
         }else{
