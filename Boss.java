@@ -33,11 +33,11 @@ public class Boss extends Entity{
         this.y = newY;
     }
     
-    public int getHealth(){
+    public int getHP(){
         return this.health;
     }
     
-    public void setHealth(int newHealth){
+    public void setHP(int newHealth){
         this.health = newHealth;
     }
     

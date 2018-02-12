@@ -1,6 +1,22 @@
 import java.util.*;
 import java.io.*;
 
+// STORY INACTIVE, DELETE COMMENT START AND END TO MAKE STORY ACTIVE
+
+//ENSURE ENDING WORKS
+
+//SERIOUSLY WTF
+
+// TRENTON READ ABOVE
+
+// PLS
+
+// :(
+
+// D:
+
+// >:(
+
 
 public class Driver{
     public static void main(String args[]){
@@ -12,7 +28,7 @@ public class Driver{
         int newCoordX = 0;
         int newCoordY = 0;
         
-        System.out.println("\f\n\tI could tell you an amazing fantasy story about a great old castle with " + 
+        /*System.out.println("\f\n\tI could tell you an amazing fantasy story about a great old castle with " + 
         "good kings and evil kings, princes and princesses, knights and heroes.");
         pressEnter();
         System.out.println("\f\n\tIt all starts in Nebus,an old yet dainty town. But unlike everywhere else in the land...");
@@ -37,12 +53,14 @@ public class Driver{
         "entered and appeared on the land. They wreaked havoc and brought chaos.");
         pressEnter();
         System.out.println("\f\n\tThat's where you come in.");
+        */
 
         Scanner theName = new Scanner(System.in);
         System.out.println("I'm sorry, I didn't catch your name...");
         System.out.print("Name: ");
         String heroName = theName.next();
         
+        /*
         System.out.println("\f\n\tAh, " + heroName + ", a pleasure to meet you. Oh my, where are my \n" + 
         "manners? My name's Apex, and I served in the 38th Battalion back in the day...but these\n" + 
         "old bones are as rusty as my armor! Like I said, I could have told you a nice dainty\n" + 
@@ -51,6 +69,7 @@ public class Driver{
         System.out.println("\f\n\tBut that'd be a lie. Your story is about hacking and slashing through the\n" +
         "many hellspawns of the Dark Circle. No romance, no preparations. Now, let's get to the killing!");
         pressEnter();
+        */
         
         // Testing map printout
         for(int i = 0; i < 15; i++){
@@ -153,12 +172,10 @@ public class Driver{
             newCoordX = (int)(Math.random() * 15);
             newCoordY = (int)(Math.random()*15);
         }
-        Boss boss3 = new Boss("Malkos the Slayer", newCoordX, newCoordY, 200, 40, 2, 6, "Cold as death!");
+        Boss boss3 = new Boss("Malkos the Slayer", newCoordX, newCoordY, 200, 40, 2, 6, "YOU! YOU THOUGHT YOU CAME TO END THIS? YES, OF COURSE. YOU CAME TO DIE!!!");
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
-
-        //number of random weapon/armor in map?
 
         entityList.add(hero); //add all obj to list
         entityList.add(farmer1);
@@ -269,7 +286,8 @@ public class Driver{
                             lastAction = "Picked up armor";
                             break;
                         case "class Boss":
-                            
+                            BossSequence(hero, (Boss)(map[hero.getY()-1][hero.getX()]));
+                            break;
                         default:
                             break;
                     }
@@ -521,6 +539,19 @@ public class Driver{
             s += "\n";
         }
         return s;
+    }
+    
+    public static void BossSequence(Hero hero, Boss boss){
+        Scanner s = new Scanner(System.in);
+        
+        System.out.println("\f\n\n\nA BOSS HAS DESCENDED!");
+        pressEnter();
+        
+        System.out.println("\f\n\n---Stats---\nName: " + boss.getName() + ", HP: " + boss.getHP() + ", Level: " + boss.getLevel());
+        pressEnter();
+        
+        System.out.println("\f" + boss.getName() + " stares at you menacingly...\n\n" + boss.getQuote());
+        pressEnter();
     }
 
     public static void AttackSequence(Entity[][] map, Hero hero){
