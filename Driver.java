@@ -154,7 +154,7 @@ public class Driver{
             newCoordX = (int)(Math.random() * 15);
             newCoordY = (int)(Math.random()*15);
         }
-        Boss boss1 = new Boss("Glog the Slug", newCoordX, newCoordY, 175, 20, 1, 4, "Glub glub");
+        Shrine shrine1 = new Shrine(newCoordX, newCoordY, 1);
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
@@ -163,7 +163,7 @@ public class Driver{
             newCoordX = (int)(Math.random() * 15);
             newCoordY = (int)(Math.random()*15);
         }
-        Boss boss2 = new Boss("Mikmik the Troll", newCoordX, newCoordY, 150, 35, 3, 5, "My treasure! Mine!");
+        Shrine shrine2 = new Shrine(newCoordX, newCoordY, 2);
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
@@ -172,7 +172,7 @@ public class Driver{
             newCoordX = (int)(Math.random() * 15);
             newCoordY = (int)(Math.random()*15);
         }
-        Boss boss3 = new Boss("Malkos the Slayer", newCoordX, newCoordY, 200, 40, 2, 6, "YOU! YOU THOUGHT YOU CAME TO END THIS? YES, OF COURSE. YOU CAME TO DIE!!!");
+        Shrine shrine3 = new Shrine(newCoordX, newCoordY, 3);
         takenCoord[index][0] = newCoordX;
         takenCoord[index][1] = newCoordY;
         index++;
@@ -184,9 +184,9 @@ public class Driver{
         entityList.add(potion1);
         entityList.add(bronzeArmor);
         entityList.add(shadowbane_curse);
-        entityList.add(boss1);
-        entityList.add(boss2);
-        entityList.add(boss3);
+        entityList.add(shrine1);
+        entityList.add(shrine2);
+        entityList.add(shrine3);
 
         for(int i = 0; i < entityList.size(); i++){ //set all obj to map
             Entity currentObj = entityList.get(i);
@@ -212,6 +212,12 @@ public class Driver{
         String toSouth = "";
         String toEast = "";
         double monsterChance = 0.25; //Hardcoded Monster Creation chance; default = 0.15
+        
+        //BOSS CREATION
+        //Boss(String name, int health, int attack, int speed, int level, String quote)
+        Boss boss3 = new Boss("Malkos the Slayer", 200, 40, 2, 6, "YOU! YOU THOUGHT YOU CAME TO END THIS? YES, OF COURSE. YOU CAME TO DIE!!!");
+        Boss boss2 = new Boss("Mikmik the Troll",  150, 35, 3, 5, "My treasure! Mine!");
+        Boss boss1 = new Boss("Glog the Slug",  175, 20, 1, 4, "Glub glub");
         
         while(true){
             System.out.println("\f");
@@ -285,8 +291,22 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up armor";
                             break;
-                        case "class Boss":
-                            BossSequence(hero, (Boss)(map[hero.getY()-1][hero.getX()]));
+                        case "class Shrine":
+                            Shrine shrine = (Shrine)(map[hero.getY()][hero.getX()]);
+                            int stage = shrine.getStage();
+                            Boss boss = new Boss();
+                            switch(stage){
+                                case 1:
+                                    boss = boss1;
+                                    break;
+                                case 2:
+                                    boss = boss2;
+                                    break;
+                                case 3:
+                                    boss = boss3;
+                                    break;
+                            }
+                            ShrineSequence(hero, shrine, boss);
                             break;
                         default:
                             break;
@@ -541,6 +561,31 @@ public class Driver{
         return s;
     }
     
+    public static void ShrineSequence(Hero hero, Shrine shrine, Boss boss){
+        Scanner s = new Scanner(System.in);
+        
+        while(true){
+            System.out.println("\fYou found a shrine!");
+            System.out.println("\n\nLighting it will summon the stage " + shrine.getStage() + " boss.");
+            System.out.println("\n\nWould you like to light the shrine?");
+            System.out.println("\n\n1. Hell ya, light the shrine.");
+            System.out.println("\n2. Nope, I'm out.");
+            System.out.print("\nChoice: ");
+            String lightornah = s.next();
+            if(lightornah.equals("1")){
+                System.out.println("\fSummoning the boss..."); 
+                BossSequence(hero, boss);
+                break;
+            } else if(lightornah.equals("2")){
+                System.out.println("You leave the shrine unlighted.");
+                break;
+            } else {
+                System.out.println("That's not an option, try again!");
+                continue;
+            }
+        }
+    }
+    
     public static void BossSequence(Hero hero, Boss boss){
         Scanner s = new Scanner(System.in);
         
@@ -550,7 +595,7 @@ public class Driver{
         System.out.println("\f\n\n---Stats---\nName: " + boss.getName() + ", HP: " + boss.getHP() + ", Level: " + boss.getLevel());
         pressEnter();
         
-        System.out.println("\f" + boss.getName() + " stares at you menacingly...\n\n" + boss.getQuote());
+        System.out.println("\f\n\n" + boss.getName() + " stares at you menacingly...\n\n" + boss.getQuote());
         pressEnter();
     }
 

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Shrine()
+comment1.params=x\ y\ s
+comment1.target=Shrine(int,\ int,\ int)
+comment2.params=
+comment2.target=int\ getX()
+comment3.params=
+comment3.target=int\ getY()
+comment4.params=
+comment4.target=int\ getStage()
+comment5.params=
+comment5.target=java.lang.String\ getName()
+comment6.params=
+comment6.target=java.lang.String\ toString()
+numComments=7

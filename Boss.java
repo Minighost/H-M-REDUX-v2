@@ -6,7 +6,7 @@ public class Boss extends Entity{
     public Boss(){
     }
     
-    public Boss(String name, int x, int y, int health, int attack, int speed, int level, String quote){
+    public Boss(String name, int health, int attack, int speed, int level, String quote){
         this.name = name;
         this.x = x;
         this.y = y;
