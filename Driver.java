@@ -23,7 +23,7 @@ public class Driver{
         Hero hero;
         Entity[][] map = new Entity[15][15];
         ArrayList<Entity> entityList = new ArrayList<Entity>();
-        int[][] takenCoord = new int[10][2];
+        int[][] takenCoord = new int[11][2];
         int index = 0;
         int newCoordX = 0;
         int newCoordY = 0;
@@ -95,7 +95,12 @@ public class Driver{
 
         newCoordX = (int)Math.random()*15;
         newCoordY = (int)Math.random()*15;
-
+        
+        Shrine final_shrine = new Shrine(7, 7, 4);
+        takenCoord[index][0] = 7;
+        takenCoord[index][1] = 7;
+        index++;
+        
         while(checkCoord(takenCoord, newCoordX, newCoordY) == false){       //farmer1
             newCoordX = (int)(Math.random()*15);
             newCoordY = (int)(Math.random()*15);
@@ -187,6 +192,7 @@ public class Driver{
         entityList.add(shrine1);
         entityList.add(shrine2);
         entityList.add(shrine3);
+        entityList.add(final_shrine);
 
         for(int i = 0; i < entityList.size(); i++){ //set all obj to map
             Entity currentObj = entityList.get(i);
@@ -211,13 +217,14 @@ public class Driver{
         String toWest = "";
         String toSouth = "";
         String toEast = "";
-        double monsterChance = 0.25; //Hardcoded Monster Creation chance; default = 0.15
+        double monsterChance = 0; //Hardcoded Monster Creation chance; default = 0.25
         
         //BOSS CREATION
         //Boss(String name, int health, int attack, int speed, int level, String quote)
-        Boss boss3 = new Boss("Malkos the Slayer", 200, 40, 2, 6, "YOU! YOU THOUGHT YOU CAME TO END THIS? YES, OF COURSE. YOU CAME TO DIE!!!");
+        Boss boss3 = new Boss("Malkos the Slayer", 200, 40, 2, 6, "My scythe will solve this job nicely.");
         Boss boss2 = new Boss("Mikmik the Troll",  150, 35, 3, 5, "My treasure! Mine!");
-        Boss boss1 = new Boss("Glog the Slug",  175, 20, 1, 4, "Glub glub");
+        Boss boss1 = new Boss("Glog the Slug",  175, 20, 1, 4, "Glub glub...");
+        Boss boss4 = new Boss("Vulcor the Great and Terrible Reaver", 250, 50, 4, 7, "YOU! YOU THOUGHT YOU CAME TO END THIS? YES, OF COURSE. YOU CAME TO DIE!!!");
         
         while(true){
             System.out.println("\f");
@@ -292,7 +299,7 @@ public class Driver{
                             lastAction = "Picked up armor";
                             break;
                         case "class Shrine":
-                            Shrine shrine = (Shrine)(map[hero.getY()][hero.getX()]);
+                            Shrine shrine = (Shrine)(map[hero.getY() - 1][hero.getX()]);
                             int stage = shrine.getStage();
                             Boss boss = new Boss();
                             switch(stage){
@@ -304,6 +311,9 @@ public class Driver{
                                     break;
                                 case 3:
                                     boss = boss3;
+                                    break;
+                                case 4:
+                                    boss = boss4;
                                     break;
                             }
                             ShrineSequence(hero, shrine, boss);
@@ -353,6 +363,26 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up armor";
                             break;
+                        case "class Shrine":
+                            Shrine shrine = (Shrine)(map[hero.getY()][hero.getX() - 1]);
+                            int stage = shrine.getStage();
+                            Boss boss = new Boss();
+                            switch(stage){
+                                case 1:
+                                    boss = boss1;
+                                    break;
+                                case 2:
+                                    boss = boss2;
+                                    break;
+                                case 3:
+                                    boss = boss3;
+                                    break;
+                                case 4:
+                                    boss = boss4;
+                                    break;
+                            }
+                            ShrineSequence(hero, shrine, boss);
+                            break;
                         default:
                             break;
                     }
@@ -398,6 +428,26 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up armor";
                             break;
+                        case "class Shrine":
+                            Shrine shrine = (Shrine)(map[hero.getY() + 1][hero.getX()]);
+                            int stage = shrine.getStage();
+                            Boss boss = new Boss();
+                            switch(stage){
+                                case 1:
+                                    boss = boss1;
+                                    break;
+                                case 2:
+                                    boss = boss2;
+                                    break;
+                                case 3:
+                                    boss = boss3;
+                                    break;
+                                case 4:
+                                    boss = boss4;
+                                    break;
+                            }
+                            ShrineSequence(hero, shrine, boss);
+                            break;
                         default:
                             break;
                     }
@@ -442,6 +492,26 @@ public class Driver{
                             hero.setX(hero.getX() + 1);
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up armor";
+                            break;
+                        case "class Shrine":
+                            Shrine shrine = (Shrine)(map[hero.getY()][hero.getX() + 1]);
+                            int stage = shrine.getStage();
+                            Boss boss = new Boss();
+                            switch(stage){
+                                case 1:
+                                    boss = boss1;
+                                    break;
+                                case 2:
+                                    boss = boss2;
+                                    break;
+                                case 3:
+                                    boss = boss3;
+                                    break;
+                                case 4:
+                                    boss = boss4;
+                                    break;
+                            }
+                            ShrineSequence(hero, shrine, boss);
                             break;
                         default:
                             break;
@@ -550,8 +620,8 @@ public class Driver{
                     s = s + "Monster\t";
                 }else if((i.getClass().isInstance(new Farmer()))){
                     s = s + "Farmer\t";
-                }else if((i.getClass().isInstance(new Boss()))){
-                    s = s + "Boss\t";
+                }else if((i.getClass().isInstance(new Shrine()))){
+                    s = s + "Shrine\t";
                 }else{
                     s = s + ".\t";
                 }
@@ -573,7 +643,8 @@ public class Driver{
             System.out.print("\nChoice: ");
             String lightornah = s.next();
             if(lightornah.equals("1")){
-                System.out.println("\fSummoning the boss..."); 
+                System.out.println("\fSummoning the boss...");
+                pressEnter();
                 BossSequence(hero, boss);
                 break;
             } else if(lightornah.equals("2")){
@@ -597,6 +668,146 @@ public class Driver{
         
         System.out.println("\f\n\n" + boss.getName() + " stares at you menacingly...\n\n" + boss.getQuote());
         pressEnter();
+        
+        if(boss.getLevel() == 4){
+            boolean full = true;
+            for(int i = 0; i < hero.getHardStorage().length; i++){
+                if(!(hero.getHardStorage()[i].getClass().equals("class Potion"))){
+                    full = false;
+                }
+            }
+            if(full == false){
+                System.out.println("\fENEMY PREEMPTIVE STRIKE");
+                pressEnter();
+                System.out.println("\fIn one swing, with a whistling tone of finality, " + boss.getName() + " crushes you like a gnat.");
+                pressEnter();
+                System.out.println("\f\n\n\nYOU DIED.");
+                System.exit(0);
+            }
+        } else if(boss.getLevel() == 5){
+            if(!(hero.getWeapon().getName().equals("Short Sword"))){
+                System.out.println("\fENEMY PREEMPTIVE STRIKE");
+                pressEnter();
+                System.out.println("\fIn one swing, with a whistling tone of finality, " + boss.getName() + " crushes you like a gnat.");
+                pressEnter();
+                System.out.println("\f\n\n\nYOU DIED.");
+                System.exit(0);
+            }
+        } else if(boss.getLevel() == 6){
+            if(!(hero.getWeapon().getName().equals("Long Sword"))){
+                System.out.println("\fENEMY PREEMPTIVE STRIKE");
+                pressEnter();
+                System.out.println("\fIn one swing, with a whistling tone of finality, " + boss.getName() + " crushes you like a gnat.");
+                pressEnter();
+                System.out.println("\f\n\n\nYOU DIED.");
+                System.exit(0);
+            }
+        } else if(boss.getLevel() == 7){
+            if(!(hero.getWeapon().getName().equals("Battle Axe") && !(hero.getArmor().getName().equals("Guard's Plate") && !(hero.hasPhoenix() == true)))){
+                System.out.println("\fENEMY PREEMPTIVE STRIKE");
+                pressEnter();
+                System.out.println("\fIn one swing, with a whistling tone of finality, " + boss.getName() + " crushes you like a gnat.");
+                pressEnter();
+                System.out.println("\f\n\n\nYOU DIED.");
+                System.exit(0);
+            }
+        }
+        
+        int turn = 0;
+        while(true){
+            if(boss.getHP() < 0){
+                break;
+            }
+            int dmgReceived = boss.getDMG();
+            if(hero.getHP() <= 0){
+                if(hero.hasPhoenix() == true){
+                    System.out.println("\n---------Phoenix Mode has been triggered! Heroes never die!---------\n");
+                    hero.setHP(100);
+                    hero.setPhoenixMode(false);
+                }else{
+                    System.out.println("\f\n\n\t\t\tYOU HAVE DIED");
+                    return;
+                }
+            }
+            int choice = 0;
+            
+            System.out.println("\f---------TURN " + (turn + 1) + "---------");
+            System.out.println("Hero stats: HP - " + hero.getHP() + ", Weapon - " + hero.getWeapon().getName() + ", Armor - " + hero.getArmor().getName());
+            System.out.println("Monster stats: HP-" + boss.getHP() + ", Level-" + boss.getLevel());
+            System.out.println("Your turn!\n");
+            System.out.println("1. Attack");
+            System.out.println("2. Run");
+            if(hero.hasBomb() == true){
+                System.out.println("3. Use Bomb (Halves Enemy HP)");
+            }
+            System.out.print("Choice: ");
+            try{
+                choice = s.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("Not an option, try again!");
+                pressEnter();
+                choice = 0;
+                s = new Scanner(System.in);
+                continue;
+            }
+            switch(choice){
+                case 1:
+                    System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the boss!");
+                    int heroDMGdealt = (int)(Math.random() * hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                    boss.setHP(boss.getHP() - heroDMGdealt);
+                    if(boss.getHP() < 0){
+                        boss.setHP(0);
+                    }
+                    System.out.println("\n---You dealt " + heroDMGdealt + " damage to the " + boss.getName() + "!---" +
+                        "\nThe " + boss.getName() + " has " + boss.getHP() + " health left.");
+                    if(boss.getHP() == 0){
+                        if(boss.getLevel() == 4){
+                            hero.setHides(hero.getHides() + 25);
+                            System.out.println("---You got 100 hides!---");
+                        }else if(boss.getLevel() == 5){
+                            hero.setHides(hero.getHides() + 50);
+                            System.out.println("---You got 150 hides!---");
+                        }else if(boss.getLevel() == 6){
+                            hero.setHides(hero.getHides() + 75);
+                            System.out.println("---You got 200 hides!---");
+                        }
+                        System.out.println("");
+                        pressEnter();
+                        return;
+                    }
+                    
+                    System.out.println("\nThe monster counterattacks, dealing " + heroDMGdealt + " to the hero.\n");
+                    
+                    pressEnter();
+                    break;
+                case 2:
+                    boolean hasRun = false;
+                    double chance = Math.random();
+                    double chanceInc = (hero.getFootwear()).getChanceInc();
+                    chance = chance + chanceInc;
+                    if(boss.getLevel() >=4 && chance > 0.9){
+                        hasRun = true;
+                    }
+                    if(hasRun == true){
+                        System.out.println("You run far away...");
+                        pressEnter();
+                        return;
+                    }
+                    break;
+                case 3:
+                    if(hero.hasBomb() == true){
+                        boss.setHP(boss.getHP()/2);
+                        break;
+                    }else{
+                        continue;
+                    }
+                default:
+                    System.out.println("Uh oh, you broke");
+                    break;
+            }
+            hero.setHP(hero.getHP() - dmgReceived);
+            turn++;
+        }
     }
 
     public static void AttackSequence(Entity[][] map, Hero hero){
