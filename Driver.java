@@ -119,7 +119,7 @@ public class Driver{
         String toWest = "";
         String toSouth = "";
         String toEast = "";
-        double monsterChance = 0; //Hardcoded Monster Creation chance
+        double monsterChance = 0.15; //Hardcoded Monster Creation chance; default = 0.15
         
         while(true){
             System.out.println("\f");
@@ -454,14 +454,24 @@ public class Driver{
         Monster monster = new Monster(hero.getX(), hero.getY(), tempHP, level, tempName);
         System.out.println("A wild " + monster.getName() + " appeared!");
         pressEnter();
-        System.out.println("\f");
         while(monster.getHP() > 0){
             int choice = 0;
-
+            System.out.println("\f");
+            
+            System.out.println("Hero stats: HP-" + hero.getHP() + ", Weapon-" + hero.getWeapon().getName() + ", Armor-" + hero.getArmor().getName());
+            System.out.println("Monster stats: HP-" + monster.getHP() + ", Level-" + monster.getLevel());
             System.out.println("Your turn!\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
-            choice = s.nextInt();
+            try{
+                choice = s.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("Not an option, try again!");
+                pressEnter();
+                choice = 0;
+                s = new Scanner(System.in);
+                continue;
+            }
             switch(choice){
                 case 1:
                     System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the monster!");
@@ -475,13 +485,19 @@ public class Driver{
                     if(monster.getHP() == 0){
                         if(monster.getLevel() == 1){
                             hero.setHides(hero.getHides() + 25);
+                            System.out.println("---You got 25 hides!---");
                         }else if(monster.getLevel() == 2){
                             hero.setHides(hero.getHides() + 50);
+                            System.out.println("---You got 50 hides!---");
                         }else if(monster.getLevel() == 3){
                             hero.setHides(hero.getHides() + 75);
+                            System.out.println("---You got 75 hides!---");
                         }
+                        System.out.println("");
+                        pressEnter();
                         return;
                     }
+                    pressEnter();
                     break;
                 case 2:
                     boolean hasRun = false;
@@ -495,6 +511,7 @@ public class Driver{
                     }
                     if(hasRun == true){
                         System.out.println("You run far away...");
+                        pressEnter();
                         return;
                     }
                     break;
@@ -521,6 +538,8 @@ public class Driver{
             } catch (InputMismatchException e){
                 System.out.println("Not an option, please try again!");
                 pressEnter();
+                choice = 0;
+                s = new Scanner(System.in);
                 continue;
             }
             switch(choice){
@@ -567,8 +586,17 @@ public class Driver{
             System.out.println("1. Use/Equip Item");
             System.out.println("2. Quit");
             System.out.print("Choice: ");
+            int choice = 0;
             
-            int choice = s.nextInt();
+            try{
+                choice = s.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("Not an option, please try again!");
+                pressEnter();
+                choice = 0;
+                s = new Scanner(System.in);
+                continue;
+            }
             
             if(choice == 2){
                 break;
@@ -582,7 +610,15 @@ public class Driver{
                     }
                 }
                 System.out.println("\nChoice: ");
-                choice = s.nextInt();
+                try{
+                    choice = s.nextInt();
+                } catch (InputMismatchException e){
+                    System.out.println("Not an option, please try again!");
+                    pressEnter();
+                    choice = 0;
+                    s = new Scanner(System.in);
+                    continue;
+                }
                 choice--;
                 if(choice >= list.length || list[choice] == null){
                     break;
