@@ -11,12 +11,47 @@ public class Driver{
         int index = 0;
         int newCoordX = 0;
         int newCoordY = 0;
+        
+        System.out.println("\f\n\tI could tell you an amazing fantasy story about a great old castle with " + 
+        "good kings and evil kings, princes and princesses, knights and heroes.");
+        pressEnter();
+        System.out.println("\f\n\tIt all starts in Nebus,an old yet dainty town. But unlike everywhere else in the land...");
+        pressEnter();
+        System.out.println("\f\n\tNebus didn't have kings. Nor did it have queens, or princes or princesses.");
+        pressEnter();
+        System.out.println("\f\n\tInstead, the old seers and warlocks guided the happenings of the town.\n" + 
+        "If they had anything wrong to say, nobody knew. They were right, whether you knew better or not...");
+        pressEnter();
+        System.out.println("\f\n\tSo it seemed inevitable for the mighty Malkos the Slayer to stumble upon\n" + 
+        "the little village of Nebus. He'd freed the last village from the evil plights of dragons, what\n" + 
+        "difficulty was there in learning a little magic?");
+        pressEnter();
+        System.out.println("\f\n\tSo Malkos studied and learned, gaining his ranks through aggressive spells and witchcraft\n" + 
+        "Before the little town of Nebus knew it, Malkos had become their most powerful seer...");
+        pressEnter();
+        System.out.println("\f\n\tBut, the powerhungry Malkos killed all of Nebus' advisors and assumed absolute control\n" +
+        "So there was nobody to warn him of the evil in Nebus' magic...");
+        pressEnter();
+        System.out.println("\f\n\tBy the time Malkos discovered Nebus' secrets, it was too late.\n" + 
+        "Malkos had summoned the Dark Circle, a portal through which legions of hellish creatures\n" + 
+        "entered and appeared on the land. They wreaked havoc and brought chaos.");
+        pressEnter();
+        System.out.println("\f\n\tThat's where you come in.");
 
         Scanner theName = new Scanner(System.in);
-        System.out.println("What is your name?");
+        System.out.println("I'm sorry, I didn't catch your name...");
         System.out.print("Name: ");
         String heroName = theName.next();
-
+        
+        System.out.println("\f\n\tAh, " + heroName + ", a pleasure to meet you. Oh my, where are my \n" + 
+        "manners? My name's Apex, and I served in the 38th Battalion back in the day...but these\n" + 
+        "old bones are as rusty as my armor! Like I said, I could have told you a nice dainty\n" + 
+        "story about kings and queens and castles and all that nonsense...");
+        pressEnter();
+        System.out.println("\f\n\tBut that'd be a lie. Your story is about hacking and slashing through the\n" +
+        "many hellspawns of the Dark Circle. No romance, no preparations. Now, let's get to the killing!");
+        pressEnter();
+        
         // Testing map printout
         for(int i = 0; i < 15; i++){
             for(int j = 0; j < 15; j++){
@@ -142,6 +177,14 @@ public class Driver{
         }
 
         runGame(map, entityList, hero);
+        
+        //ENDGAME
+        System.out.println("\f\n\tYou've done it! You cleared the waves of the Dark Circle!");
+        pressEnter();
+        System.out.println("\f\n\tThank you so much from the bottom of my old heart. And I'm sure\n" +
+        "Nebus--no, the entire world--is extremely grateful for your acts. Maybe I was wrong...");
+        pressEnter();
+        System.out.println("\f\n\tMaybe there are heroes...\n\n\t\tTHE END");
     }
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList, Hero hero){
