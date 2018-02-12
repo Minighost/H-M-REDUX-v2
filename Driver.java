@@ -225,6 +225,8 @@ public class Driver{
                             map[hero.getY()][hero.getX()] = hero;
                             lastAction = "Picked up armor";
                             break;
+                        case "class Boss":
+                            
                         default:
                             break;
                     }
@@ -467,6 +469,8 @@ public class Driver{
                     s = s + "Monster\t";
                 }else if((i.getClass().isInstance(new Farmer()))){
                     s = s + "Farmer\t";
+                }else if((i.getClass().isInstance(new Boss()))){
+                    s = s + "Boss\t";
                 }else{
                     s = s + ".\t";
                 }
@@ -511,7 +515,7 @@ public class Driver{
             }
             int choice = 0;
             
-            System.out.println("---------TURN " + (turn + 1) + "---------");
+            System.out.println("\f---------TURN " + (turn + 1) + "---------");
             System.out.println("Hero stats: HP - " + hero.getHP() + ", Weapon - " + hero.getWeapon().getName() + ", Armor - " + hero.getArmor().getName());
             System.out.println("Monster stats: HP-" + monster.getHP() + ", Level-" + monster.getLevel());
             System.out.println("Your turn!\n");
@@ -520,6 +524,7 @@ public class Driver{
             if(hero.hasBomb() == true){
                 System.out.println("3. Use Bomb (Instant Kill)");
             }
+            System.out.print("Choice: ");
             try{
                 choice = s.nextInt();
             } catch (InputMismatchException e){
@@ -554,6 +559,9 @@ public class Driver{
                         pressEnter();
                         return;
                     }
+                    
+                    System.out.println("\nThe monster counterattacks, dealing " + heroDMGdealt + " to the hero.\n");
+                    
                     pressEnter();
                     break;
                 case 2:
