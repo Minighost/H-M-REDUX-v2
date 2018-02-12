@@ -16,7 +16,7 @@ public class Farmer extends Entity{
         shopItems[1] = new Potion("Medium Potion", 50, 75);
         shopItems[2] = new Potion("Greater Potion", 75, 100);
         shopItems[3] = new Potion("Phoenix Potion", 999, 500);
-        shopItems[4] = new Bomb("Large Bomb", 150);
+        shopItems[4] = new Bomb("Large Dynamite", 150);
         shopItems[5] = new Armor(0.25, "Guard's Plate", 125);
         shopItems[6] = new Satchel(6, "6-Slotted Satchel", 100);
         shopItems[7] = new Footwear(0.5, "Leather Sandals", 75);

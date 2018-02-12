@@ -9,6 +9,7 @@ public class Hero extends Entity{
     private Entity[] storage;
     private Footwear footwear;
     int index = 0;
+    private boolean phoenixMode;
 
     public Hero(){
     }
@@ -155,6 +156,14 @@ public class Hero extends Entity{
     
     public void setIndex(int newIndex){
         this.index = newIndex;
+    }
+    
+    public boolean hasPhoenix(){
+        return phoenixMode;
+    }
+    
+    public void setPhoenixMode(boolean mode){
+        this.phoenixMode = mode;
     }
     
     public Entity[] getHardStorage(){
