@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Hero extends Entity{
     private int x, y;
-    private int hp, dmg, hides;
+    private int hp, hides;
     private String name;
     private Weapon weapon;
     private Armor armor;
@@ -21,7 +21,6 @@ public class Hero extends Entity{
         this.x = x;
         this.y = y;
         this.hp = 100;
-        this.dmg = 10;
         this.weapon = w;
         this.armor = a;
         this.hides = 0;
@@ -34,14 +33,19 @@ public class Hero extends Entity{
     
     public void buyObject(int objectNumber, Farmer farmer){
         if(index >= storage.length){
+            System.out.println("Inventory full!\n");
+            pressEnter();            
             return;
         }
-        if(objectNumber == 0 || objectNumber > 9){
+        if(objectNumber <= 0 || objectNumber > farmer.getShopLength()+1){
+            System.out.println("Not an option, try again!\n");
+            pressEnter();
             return;
         }
         ShopItem item = farmer.getItem(objectNumber - 1);
         if(item == null){
-            System.out.println("Cannot purchase.");
+            System.out.println("Cannot purchase.\n");
+            pressEnter();
             return;
         }
         if(hides < item.getPrice()){
@@ -96,14 +100,6 @@ public class Hero extends Entity{
 
     public void setHP(int newHP){
         this.hp = newHP;
-    }
-
-    public int getDMG(){
-        return this.dmg;
-    }
-
-    public void setDMG(int newDMG){
-        this.dmg = newDMG;
     }
     
     public int getHides(){
@@ -207,6 +203,12 @@ public class Hero extends Entity{
 
     public String toString(){
         return "Name: " + this.name + "\nHP: " + this.hp + "\nWeapon: " + this.weapon.getName() +
-        "\nDamage: " + this.dmg + "\nArmor: " + this.armor.getName() + "\nHides: " + this.getHides();
+        "\nDamage: " + this.weapon.getMaxDmg() + "\nArmor: " + this.armor.getName() + "\nHides: " + this.getHides();
+    }
+    
+    public void pressEnter(){
+        Scanner s = new Scanner(System.in);
+        System.out.print("Press Enter to continue...");
+        String str = s.nextLine();
     }
 }

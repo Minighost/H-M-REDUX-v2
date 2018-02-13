@@ -71,8 +71,10 @@ public class Driver{
             hero = new Hero(0, 14, new Weapon(1200, 2000, "God Sword"), new Armor(1, "God Plate", 0), 999999, 5, "TESTER");
             hero.setFootwear(new Footwear(1, "God Boots", 0));
             hero.setPhoenixMode(true);
+        } else if(heroName.equals("tester")){
+            hero = new Hero(0, 14, new Weapon(20, 30, "Noob Sword"), new Armor(1, "Starter Chest Plate", 0), 500, 2, "Test Player");
         }else{
-            hero = new Hero(0, 14, dagger, leatherArmor, 0, 2, heroName);
+            hero = new Hero(0, 14, dagger, leatherArmor, 100, 2, heroName);
         }
 
         takenCoord[index][0] = hero.getX();
@@ -207,7 +209,7 @@ public class Driver{
         String toWest = "";
         String toSouth = "";
         String toEast = "";
-        double monsterChance = 0; //Hardcoded Monster Creation chance; default = 0.25
+        double monsterChance = 0.15; //Hardcoded Monster Creation chance; default = 0.15
         
         //BOSS CREATION
         //Boss(String name, int health, int attack, int speed, int level, String quote)
@@ -683,7 +685,7 @@ public class Driver{
                 System.exit(0);
             }
         } else if(boss.getLevel() == 5){
-            if(!(hero.getWeapon().getName().equals("Short Sword"))){
+            if(!(hero.getWeapon().getName().equals("Iron Shortsword"))){
                 System.out.println("\fENEMY PREEMPTIVE STRIKE");
                 pressEnter();
                 System.out.println("\fIn one swing, with a whistling tone of finality, " + boss.getName() + " crushes you like a gnat.");
@@ -692,7 +694,7 @@ public class Driver{
                 System.exit(0);
             }
         } else if(boss.getLevel() == 6){
-            if(!(hero.getWeapon().getName().equals("Long Sword"))){
+            if(!(hero.getWeapon().getName().equals("Steel Longsword"))){
                 System.out.println("\fENEMY PREEMPTIVE STRIKE");
                 pressEnter();
                 System.out.println("\fIn one swing, with a whistling tone of finality, " + boss.getName() + " crushes you like a gnat.");
@@ -701,7 +703,7 @@ public class Driver{
                 System.exit(0);
             }
         } else if(boss.getLevel() == 7){
-            if(!(hero.getWeapon().getName().equals("Battle Axe") && !(hero.getArmor().getName().equals("Guard's Plate") && !(hero.hasPhoenix() == true)))){
+            if(!(hero.getWeapon().getName().equals("Engraved Battle-axe") && !(hero.getArmor().getName().equals("Guard's Plate") && !(hero.hasPhoenix() == true)))){
                 System.out.println("\fENEMY PREEMPTIVE STRIKE");
                 pressEnter();
                 System.out.println("\fIn one swing, with a whistling tone of finality, " + boss.getName() + " crushes you like a gnat.");
@@ -751,7 +753,7 @@ public class Driver{
             switch(choice){
                 case 1:
                     System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the boss!");
-                    int heroDMGdealt = (int)(Math.random() * hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                    int heroDMGdealt = (int)(Math.random() * (hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg())) + hero.getWeapon().getMinDmg();
                     String p = "";
                     boss.setHP(boss.getHP() - heroDMGdealt);
                     p = p + "\n---You dealt " + heroDMGdealt + " damage to the " + boss.getName() + "!---" +
@@ -767,13 +769,13 @@ public class Driver{
                     System.out.println(p);
                     if(boss.getHP() == 0){
                         if(boss.getLevel() == 4){
-                            hero.setHides(hero.getHides() + 25);
+                            hero.setHides(hero.getHides() + 100);
                             System.out.println("---You got 100 hides!---");
                         }else if(boss.getLevel() == 5){
-                            hero.setHides(hero.getHides() + 50);
+                            hero.setHides(hero.getHides() + 150);
                             System.out.println("---You got 150 hides!---");
                         }else if(boss.getLevel() == 6){
-                            hero.setHides(hero.getHides() + 75);
+                            hero.setHides(hero.getHides() + 200);
                             System.out.println("---You got 200 hides!---");
                         }
                         System.out.println("");
@@ -781,7 +783,7 @@ public class Driver{
                         return;
                     }
                     
-                    System.out.println("\nThe monster counterattacks, dealing " + heroDMGdealt + " to the hero.\n");
+                    System.out.println("\nThe monster counterattacks, dealing " + dmgReceived + " to the hero.\n");
                     
                     pressEnter();
                     break;
@@ -804,6 +806,11 @@ public class Driver{
                         System.out.println("You run far away...");
                         pressEnter();
                         return;
+                    } else {
+                        System.out.println("You run far away...");
+                        System.out.println("\nBut the monster caught up!!!");
+                        System.out.println("\n\n---Hero takes " + dmgReceived + " damage!---");
+                        pressEnter();
                     }
                     break;
                 case 3:
@@ -879,7 +886,7 @@ public class Driver{
             switch(choice){
                 case 1:
                     System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the monster!");
-                    int heroDMGdealt = (int)(Math.random() * hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                    int heroDMGdealt = (int)(Math.random() * (hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg())) + hero.getWeapon().getMinDmg();
                     monster.setHP(monster.getHP() - heroDMGdealt);
                     if(monster.getHP() < 0){
                         monster.setHP(0);
@@ -971,10 +978,10 @@ public class Driver{
             switch(choice){
                 case 1:
                     farmer.getShopItems();
-                    System.out.println("\n\n11. Go back");
+                    System.out.println("\n\n" + (farmer.getShopLength()+1) + ". Go back");
                     System.out.print("Choice: ");
                     choice = s.nextInt();
-                    if(choice == 11){
+                    if(choice == (farmer.getShopLength()+1)){
                         System.out.println("\nPurchase cancelled.\n\t");
                         pressEnter();
                         continue;
@@ -1002,12 +1009,7 @@ public class Driver{
         Entity[] list = hero.getHardStorage();
         
         while(true){
-            System.out.println("\f");
-            for(int i = 0; i < list.length; i++){
-                if(list[i] != null){
-                    System.out.println(list[i]);
-                }
-            }
+            System.out.print("\f");
             System.out.println("What would you like to do?");
             System.out.println("1. Use/Equip Item");
             System.out.println("2. Quit");
