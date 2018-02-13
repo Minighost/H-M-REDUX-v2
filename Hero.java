@@ -67,6 +67,9 @@ public class Hero extends Entity{
             if((item.getClass()).isInstance(new Footwear(0, null, 0))){
                 footwear = (Footwear)item;
             }
+            if((item.getClass()).isInstance(new Weapon())){
+                addToStorage((Weapon)item);
+            }
             System.out.println(item.toString() + " bought.");
         }
     }
