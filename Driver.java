@@ -752,12 +752,19 @@ public class Driver{
                 case 1:
                     System.out.println("Your " + hero.getWeapon().getName() + " slices out, cutting the boss!");
                     int heroDMGdealt = (int)(Math.random() * hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                    String p = "";
                     boss.setHP(boss.getHP() - heroDMGdealt);
+                    p = p + "\n---You dealt " + heroDMGdealt + " damage to the " + boss.getName() + "!---" +
+                        "\nThe " + boss.getName() + " has " + boss.getHP() + " health left.";
+                    if(!((hero.getFootwear()).getName().equals("Bare Feet"))){
+                        int heroDMGdealt2 = (int)(Math.random() * hero.getWeapon().getMaxDmg() - hero.getWeapon().getMinDmg()) + hero.getWeapon().getMinDmg();
+                        boss.setHP(boss.getHP() - heroDMGdealt2);
+                        p = p + "\nDouble strike! You dealt an additional " + heroDMGdealt2 + " damage!";
+                    }
                     if(boss.getHP() < 0){
                         boss.setHP(0);
                     }
-                    System.out.println("\n---You dealt " + heroDMGdealt + " damage to the " + boss.getName() + "!---" +
-                        "\nThe " + boss.getName() + " has " + boss.getHP() + " health left.");
+                    System.out.println(p);
                     if(boss.getHP() == 0){
                         if(boss.getLevel() == 4){
                             hero.setHides(hero.getHides() + 25);
@@ -783,6 +790,13 @@ public class Driver{
                     double chance = Math.random();
                     double chanceInc = (hero.getFootwear()).getChanceInc();
                     chance = chance + chanceInc;
+                    boolean isFacingSide = false;
+                    if(Math.random() > 0.85){ // Monster is facing away
+                        chance += 0.5;
+                    }
+                    if(Math.random() > 0.65){ // Monster is facing sideways
+                        chance += 0.15;
+                    }
                     if(boss.getLevel() >=4 && chance > 0.9){
                         hasRun = true;
                     }
