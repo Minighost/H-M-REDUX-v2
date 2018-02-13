@@ -33,22 +33,20 @@ public class Hero extends Entity{
     
     public void buyObject(int objectNumber, Farmer farmer){
         if(index >= storage.length){
-            System.out.println("Inventory full!\n");
-            pressEnter();            
+            System.out.println("Inventory full!\n"); 
             return;
         }
         if(objectNumber <= 0 || objectNumber > farmer.getShopLength()+1){
             System.out.println("Not an option, try again!\n");
-            pressEnter();
             return;
         }
         ShopItem item = farmer.getItem(objectNumber - 1);
         if(item == null){
             System.out.println("Cannot purchase.\n");
-            pressEnter();
             return;
         }
         if(hides < item.getPrice()){
+            System.out.println("Insufficient hides.\n");
             return;
         }else{
             farmer.shopItems[objectNumber-1] = null;
