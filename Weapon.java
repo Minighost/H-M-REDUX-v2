@@ -7,7 +7,7 @@ public class Weapon extends Entity implements ShopItem{
     public Weapon(){
     }
     
-    public Weapon(String n, int min, int max, int price){
+    public Weapon(String name, int min, int max, int price){
         this.name = name;
         this.minDmg = min;
         this.maxDmg = max;

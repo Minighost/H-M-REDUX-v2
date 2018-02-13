@@ -72,7 +72,7 @@ public class Driver{
             hero.setFootwear(new Footwear(1, "God Boots", 0));
             hero.setPhoenixMode(true);
         }else{
-            hero = new Hero(0, 14, dagger, leatherArmor, 0, 3, heroName);
+            hero = new Hero(0, 14, dagger, leatherArmor, 0, 2, heroName);
         }
 
         takenCoord[index][0] = hero.getX();
@@ -615,8 +615,10 @@ public class Driver{
                         s = s + "Farmer\t";
                     }else if((i.getClass().isInstance(new Shrine()))){
                         s = s + "Shrine\t";
+                    }else if((i.getClass().isInstance(new Air())) || (i.getClass()).isInstance(new Object())){
+                        s = s + ".\t";
                     }else{
-                        s = s + "||\t";
+                        s = s + "None\t";
                     }
                 }else{
                     s = s + "?\t";
@@ -950,11 +952,11 @@ public class Driver{
             switch(choice){
                 case 1:
                     farmer.getShopItems();
-                    System.out.println("\n\n9. Go back");
+                    System.out.println("\n\n11. Go back");
                     System.out.print("Choice: ");
                     choice = s.nextInt();
-                    if(choice == 9){
-                        System.out.println("\nPurchase cancelled.\n");
+                    if(choice == 11){
+                        System.out.println("\nPurchase cancelled.\n\t");
                         pressEnter();
                         continue;
                     } else {
