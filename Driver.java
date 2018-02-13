@@ -1,9 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-//COMPLETED VERSION 2/12/2018 - 1:26 am
-
-
 public class Driver{
     public static void main(String args[]){
         Hero hero;
@@ -737,8 +734,9 @@ public class Driver{
             System.out.println("Your turn!\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
+            System.out.println("3. Use Item");
             if(hero.hasBomb() == true){
-                System.out.println("3. Use Bomb (Halves Enemy HP)");
+                System.out.println("5. Use Bomb (Halves Enemy HP)");
             }
             System.out.print("Choice: ");
             try{
@@ -814,6 +812,71 @@ public class Driver{
                     }
                     break;
                 case 3:
+                    int count = 0;
+                    Entity[] list = hero.getHardStorage();
+                    System.out.println("\f");
+                    System.out.println("Which item would you like to use/equip?");
+                    for(int i = 0; i < list.length; i++){
+                        if(list[i] != null){
+                            System.out.println((i + 1) + ". " + list[i].getName());
+                            count++;
+                        }
+                    }
+                    System.out.println("\n" + count + ". Exit");
+                    System.out.println("\nChoice: ");
+                    try{
+                        choice = s.nextInt();
+                    } catch (InputMismatchException e){
+                        System.out.println("Not an option, please try again!");
+                        pressEnter();
+                        choice = 0;
+                        s = new Scanner(System.in);
+                        continue;
+                    }
+                    choice--;
+                    if(choice >= list.length || list[choice] == null || choice == count){
+                        break;
+                    }
+                    Entity item = list[choice];
+                    if((item.getClass()).isInstance(new Potion(null, 0, 0))){
+                        if((((Potion)item).getName()).equals("Phoenix Potion")){
+                            hero.setPhoenixMode(true);
+                        }else{
+                            hero.setHP(hero.getHP() + ((Potion)item).getPotency());
+                        }
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }else if((item.getClass()).isInstance(new Weapon(0, 0, null))){
+                        hero.setWeapon((Weapon)item);
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }else if((item.getClass()).isInstance(new Armor(0, null, 0))){
+                        hero.setArmor((Armor)item);
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }else if((item.getClass()).isInstance(new Footwear(0, null, 0))){
+                        hero.setFootwear((Footwear)item);
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }
+                    break;
+                case 5:
                     if(hero.hasBomb() == true){
                         boss.setHP(boss.getHP()/2);
                         break;
@@ -870,8 +933,9 @@ public class Driver{
             System.out.println("Your turn!\n");
             System.out.println("1. Attack");
             System.out.println("2. Run");
+            System.out.println("3. Use potion");
             if(hero.hasBomb() == true){
-                System.out.println("3. Use Bomb (Instant Kill)");
+                System.out.println("5. Use Bomb (Instant Kill)");
             }
             System.out.print("Choice: ");
             try{
@@ -940,6 +1004,71 @@ public class Driver{
                     }
                     break;
                 case 3:
+                    int count = 0;
+                    Entity[] list = hero.getHardStorage();
+                    System.out.println("\f");
+                    System.out.println("Which item would you like to use/equip?");
+                    for(int i = 0; i < list.length; i++){
+                        if(list[i] != null){
+                            System.out.println((i + 1) + ". " + list[i].getName());
+                            count++;
+                        }
+                    }
+                    System.out.println("\n" + count + ". Exit");
+                    System.out.println("\nChoice: ");
+                    try{
+                        choice = s.nextInt();
+                    } catch (InputMismatchException e){
+                        System.out.println("Not an option, please try again!");
+                        pressEnter();
+                        choice = 0;
+                        s = new Scanner(System.in);
+                        continue;
+                    }
+                    choice--;
+                    if(choice >= list.length || list[choice] == null || choice == count){
+                        break;
+                    }
+                    Entity item = list[choice];
+                    if((item.getClass()).isInstance(new Potion(null, 0, 0))){
+                        if((((Potion)item).getName()).equals("Phoenix Potion")){
+                            hero.setPhoenixMode(true);
+                        }else{
+                            hero.setHP(hero.getHP() + ((Potion)item).getPotency());
+                        }
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }else if((item.getClass()).isInstance(new Weapon(0, 0, null))){
+                        hero.setWeapon((Weapon)item);
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }else if((item.getClass()).isInstance(new Armor(0, null, 0))){
+                        hero.setArmor((Armor)item);
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }else if((item.getClass()).isInstance(new Footwear(0, null, 0))){
+                        hero.setFootwear((Footwear)item);
+                        list[choice] = null;
+                        for(int m = choice; m < list.length - 1; m++){
+                            list[m] = list[m + 1];
+                        }
+                        list[list.length - 1] = null;
+                        hero.setIndex(hero.getIndex() - 1);
+                    }
+                    break;
+                case 5:
                     if(hero.hasBomb() == true){
                         monster.setHP(0);
                         break;
