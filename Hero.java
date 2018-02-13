@@ -12,11 +12,12 @@ public class Hero extends Entity{
     int index = 0;
     private boolean phoenixMode;
     private boolean hasBomb;
+    private int vision;
 
     public Hero(){
     }
     
-    public Hero(int x, int y, Weapon w, Armor a, int hides, String n){
+    public Hero(int x, int y, Weapon w, Armor a, int hides, int vision, String n){
         this.x = x;
         this.y = y;
         this.hp = 100;
@@ -28,6 +29,7 @@ public class Hero extends Entity{
         this.name = n;
         this.hides = hides;
         this.footwear = new Footwear(0, "Bare Feet", 0);
+        this.vision = vision;
     }
     
     public void buyObject(int objectNumber, Farmer farmer){
@@ -186,6 +188,14 @@ public class Hero extends Entity{
             return_str += storage[i].getName() + ", ";
         }
         return return_str;
+    }
+    
+    public int getVision(){
+        return vision;
+    }
+    
+    public void setVision(int newVision){
+        vision = newVision;
     }
     
     public String getName(){

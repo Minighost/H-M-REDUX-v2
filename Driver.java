@@ -15,45 +15,45 @@ public class Driver{
         int newCoordY = 0;
         
         System.out.println("\f\n\tI could tell you an amazing fantasy story about a great old castle with " + 
-        "good kings and evil kings, princes and princesses, knights and heroes.");
+        "\n\tgood kings and evil kings, princes and princesses, knights and heroes\n\t");
         pressEnter();
-        System.out.println("\f\n\tIt all starts in Nebus,an old yet dainty town. But unlike everywhere else in the land...");
+        System.out.println("\f\n\tIt all starts in Nebus,an old yet dainty town. But unlike everywhere else in the land...\n\t");
         pressEnter();
-        System.out.println("\f\n\tNebus didn't have kings. Nor did it have queens, or princes or princesses.");
+        System.out.println("\f\n\tNebus didn't have kings. Nor did it have queens, or princes or princesses.\n\t");
         pressEnter();
-        System.out.println("\f\n\tInstead, the old seers and warlocks guided the happenings of the town.\n" + 
-        "If they had anything wrong to say, nobody knew. They were right, whether you knew better or not...");
+        System.out.println("\f\n\tInstead, the old seers and warlocks guided the happenings of the town." + 
+        "\n\tIf they had anything wrong to say, nobody knew. They were right, whether you knew better or not...\n\t");
         pressEnter();
         System.out.println("\f\n\tSo it seemed inevitable for the mighty Malkos the Slayer to stumble upon\n" + 
-        "the little village of Nebus. He'd freed the last village from the evil plights of dragons, what\n" + 
-        "difficulty was there in learning a little magic?");
+        "\tthe little village of Nebus. He'd freed the last village from the evil plights of dragons, what\n" + 
+        "\tdifficulty was there in learning a little magic?\n\t");
         pressEnter();
         System.out.println("\f\n\tSo Malkos studied and learned, gaining his ranks through aggressive spells and witchcraft\n" + 
-        "Before the little town of Nebus knew it, Malkos had become their most powerful seer...");
+        "\tBefore the little town of Nebus knew it, Malkos had become their most powerful seer...\n\t");
         pressEnter();
         System.out.println("\f\n\tBut, the powerhungry Malkos killed all of Nebus' advisors and assumed absolute control\n" +
-        "So there was nobody to warn him of the evil in Nebus' magic...");
+        "\tSo there was nobody to warn him of the evil in Nebus' magic...\n\t");
         pressEnter();
         System.out.println("\f\n\tBy the time Malkos discovered Nebus' secrets, it was too late.\n" + 
-        "Malkos had summoned the Dark Circle, a portal through which legions of hellish creatures\n" + 
-        "entered and appeared on the land. They wreaked havoc and brought chaos.");
+        "\tMalkos had summoned the Dark Circle, a portal through which legions of hellish creatures\n" + 
+        "\tentered and appeared on the land. They wreaked havoc and brought chaos.\n\t");
         pressEnter();
         System.out.println("\f\n\tThat's where you come in.");
         
 
         Scanner theName = new Scanner(System.in);
-        System.out.println("I'm sorry, I didn't catch your name...");
+        System.out.println("\n\nI'm sorry, I didn't catch your name. May I have it?");
         System.out.print("Name: ");
         String heroName = theName.next();
         
         
         System.out.println("\f\n\tAh, " + heroName + ", a pleasure to meet you. Oh my, where are my \n" + 
-        "manners? My name's Apex, and I served in the 38th Battalion back in the day...but these\n" + 
-        "old bones are as rusty as my armor! Like I said, I could have told you a nice dainty\n" + 
-        "story about kings and queens and castles and all that nonsense...");
+        "\tmanners? My name's Apex, and I served in the 38th Battalion back in the day...but these\n" + 
+        "\told bones are as rusty as my armor! Like I said, I could have told you a nice dainty\n" + 
+        "\tstory about kings and queens and castles and all that nonsense...\n\t");
         pressEnter();
         System.out.println("\f\n\tBut that'd be a lie. Your story is about hacking and slashing through the\n" +
-        "many hellspawns of the Dark Circle. No romance, no preparations. Now, let's get to the killing!");
+        "\tmany hellspawns of the Dark Circle. No romance, no preparations, no heroes. Now, let's get to the killing!\n\t");
         pressEnter();
         
         
@@ -68,11 +68,11 @@ public class Driver{
         Weapon dagger = new Weapon(0, 0, 1, 20, "Dagger");
         Armor leatherArmor = new Armor(0, 0, 0, "Leather Chestplate");
         if(heroName.equals("godmode")){
-            hero = new Hero(0, 14, new Weapon(1200, 2000, "God Sword"), new Armor(1, "God Plate", 0), 999999, "TESTER");
+            hero = new Hero(0, 14, new Weapon(1200, 2000, "God Sword"), new Armor(1, "God Plate", 0), 999999, 5, "TESTER");
             hero.setFootwear(new Footwear(1, "God Boots", 0));
             hero.setPhoenixMode(true);
         }else{
-            hero = new Hero(0, 14, dagger, leatherArmor, 0, heroName);
+            hero = new Hero(0, 14, dagger, leatherArmor, 0, 3, heroName);
         }
 
         takenCoord[index][0] = hero.getX();
@@ -188,12 +188,16 @@ public class Driver{
         runGame(map, entityList, hero);
         
         //ENDGAME
-        System.out.println("\f\n\tYou've done it! You cleared the waves of the Dark Circle!");
-        pressEnter();
-        System.out.println("\f\n\tThank you so much from the bottom of my old heart. And I'm sure\n" +
-        "Nebus--no, the entire world--is extremely grateful for your acts. Maybe I was wrong...");
-        pressEnter();
-        System.out.println("\f\n\tMaybe there are heroes...\n\n\t\tTHE END");
+        if(hero.getHP() <= 0){
+            System.out.println("\f\n\t\tYOU HAVE DIED");
+        }else{
+            System.out.println("\f\n\tYou've done it! You cleared the waves of the Dark Circle!\n\t");
+            pressEnter();
+            System.out.println("\f\n\tThank you so much from the bottom of my old heart. And I'm sure\n" +
+            "Nebus--no, the entire world--is extremely grateful for your acts. Maybe I was wrong...\n\t");
+            pressEnter();
+            System.out.println("\f\n\tMaybe there are heroes...\n\n\t\tTHE END");
+        }
     }
 
     public static void runGame(Entity[][] map, ArrayList<Entity> entityList, Hero hero){
@@ -214,7 +218,7 @@ public class Driver{
         
         while(true){
             System.out.println("\f");
-            System.out.println(printMap(map));
+            System.out.println(printMap(map, hero, hero.getVision()));
             
             System.out.println("\n-- Info --");
             System.out.println(hero);
@@ -511,11 +515,12 @@ public class Driver{
                     inventoryMenu(hero);
                     break;
                 case "kill":
-                    return;
+                    hero.setHP(0);
                 default:
                     break;
             }
             if(hero.getHP() <= 0){
+                hero.setHP(0);
                 return;
             }
         }
@@ -589,27 +594,32 @@ public class Driver{
         return temp_str;
     }
 
-    public static String printMap(Entity[][] map){
+    public static String printMap(Entity[][] map, Hero hero, int visionThreshold){
         String s = "";
         for(int r = 0; r < 15; r++){
             for(int c = 0; c < 15; c++){
                 Object i = map[r][c];
-                if((i.getClass().isInstance(new Hero()))){
-                    s = s + "Hero\t";
-                }else if((i.getClass().isInstance(new Weapon()))){
-                    s = s + "Weapon\t";
-                }else if((i.getClass().isInstance(new Potion()))){
-                    s = s + "Potion\t";
-                }else if((i.getClass().isInstance(new Armor()))){
-                    s = s + "Armor\t";
-                }else if((i.getClass().isInstance(new Monster()))){
-                    s = s + "Monster\t";
-                }else if((i.getClass().isInstance(new Farmer()))){
-                    s = s + "Farmer\t";
-                }else if((i.getClass().isInstance(new Shrine()))){
-                    s = s + "Shrine\t";
+                int distFromHero = (int)(Math.sqrt(Math.pow(((Entity)i).getX() - hero.getX(), 2) + (Math.pow(((Entity)i).getY() - hero.getY(), 2))));
+                if(distFromHero <= visionThreshold){
+                    if((i.getClass().isInstance(new Hero()))){
+                        s = s + "Hero\t";
+                    }else if((i.getClass().isInstance(new Weapon()))){
+                        s = s + "Weapon\t";
+                    }else if((i.getClass().isInstance(new Potion()))){
+                        s = s + "Potion\t";
+                    }else if((i.getClass().isInstance(new Armor()))){
+                        s = s + "Armor\t";
+                    }else if((i.getClass().isInstance(new Monster()))){
+                        s = s + "Monster\t";
+                    }else if((i.getClass().isInstance(new Farmer()))){
+                        s = s + "Farmer\t";
+                    }else if((i.getClass().isInstance(new Shrine()))){
+                        s = s + "Shrine\t";
+                    }else{
+                        s = s + "||\t";
+                    }
                 }else{
-                    s = s + ".\t";
+                    s = s + "?\t";
                 }
             }
             s += "\n";
