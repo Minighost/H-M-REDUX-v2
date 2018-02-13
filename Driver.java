@@ -616,7 +616,7 @@ public class Driver{
                     }else if((i.getClass().isInstance(new Shrine()))){
                         s = s + "Shrine\t";
                     }else if((i.getClass().isInstance(new Air())) || (i.getClass()).isInstance(new Object())){
-                        s = s + ".\t";
+                        s = s + "?\t";
                     }else{
                         s = s + "None\t";
                     }
@@ -670,7 +670,7 @@ public class Driver{
         if(boss.getLevel() == 4){
             boolean full = true;
             for(int i = 0; i < hero.getHardStorage().length; i++){
-                if(!(hero.getHardStorage()[i].getClass().equals("class Potion"))){
+                if(!(hero.getHardStorage()[i].getClass().isInstance(new Potion()))){
                     full = false;
                 }
             }
@@ -888,7 +888,7 @@ public class Driver{
                         return;
                     }
                     
-                    System.out.println("\nThe monster counterattacks, dealing " + heroDMGdealt + " to the hero.\n");
+                    System.out.println("\nThe monster counterattacks, dealing " + dmgReceived + " to the hero.\n");
                     
                     pressEnter();
                     break;
@@ -911,6 +911,11 @@ public class Driver{
                         System.out.println("You run far away...");
                         pressEnter();
                         return;
+                    } else {
+                        System.out.println("You run far away...");
+                        System.out.println("\nBut the monster caught up!!!");
+                        System.out.println("\n\n---Hero takes " + dmgReceived + " damage!---");
+                        pressEnter();
                     }
                     break;
                 case 3:
